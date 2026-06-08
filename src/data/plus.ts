@@ -37,6 +37,6 @@ export const PLUS_BENEFITS: PlusBenefit[] = [
 export const FREE_FEATURES = [
   'Your AI companion — name them and talk any time',
   'Daily check-ins and your streak',
-  'The support library — counselling, articles, podcasts',
+  'A support library of articles, podcasts, and links to counselling',
   'Crisis lines, always one tap away',
 ];
