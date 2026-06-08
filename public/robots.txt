@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://befreeapp.net/sitemap-index.xml

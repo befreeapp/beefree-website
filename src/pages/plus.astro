@@ -1,0 +1,140 @@
+---
+import Base from '../layouts/Base.astro';
+import FullStop from '../components/FullStop.astro';
+import CtaButtons from '../components/CtaButtons.astro';
+import Sprout from '../components/Sprout.astro';
+import BefreePlusLockup from '../components/BefreePlusLockup.astro';
+import { PLUS_PRICES, PLUS_YEARLY_SAVING, PLUS_BENEFITS, FREE_FEATURES } from '../data/plus';
+---
+
+<Base
+  title="BeFree Plus — go a little further"
+  description="BeFree is free to use. Plus adds unlimited AI chat, app & content blocking, and partner check-ins — from £3.99/month. Optional, cancel any time."
+>
+  <!-- Hero -->
+  <section class="container-prose pt-6 sm:pt-10">
+    <div class="reveal">
+      <BefreePlusLockup size="h-12" />
+    </div>
+    <h1 class="reveal mt-4 text-5xl leading-[1.05] sm:text-6xl" style="--reveal-delay:80ms">Go a little further<FullStop /></h1>
+    <p class="reveal mt-5 max-w-2xl text-lg leading-relaxed text-soft sm:text-xl" style="--reveal-delay:160ms">
+      BeFree is free — and stays free. When you're ready for deeper support, Plus unlocks a
+      few extra tools to help you stay on track, from
+      <span class="font-semibold text-forest">{PLUS_PRICES.monthly}/month</span>.
+    </p>
+  </section>
+
+  <!-- Free vs Plus -->
+  <section class="container-prose py-12 sm:py-14">
+    <div class="grid gap-6 lg:grid-cols-2">
+      <!-- Free -->
+      <div class="reveal rounded-3xl border border-hairline bg-white/70 p-7 shadow-card">
+        <div class="flex items-center gap-2">
+          <Sprout class="h-7 w-auto text-teal" />
+          <h2 class="text-2xl">Always free<FullStop /></h2>
+        </div>
+        <p class="mt-2 text-sm text-soft">The heart of BeFree, with no paywall and no ads.</p>
+        <ul class="mt-5 space-y-3">
+          {
+            FREE_FEATURES.map((f) => (
+              <li class="flex items-start gap-2 text-[0.95rem] text-ink/90">
+                <span class="mt-0.5 text-teal" aria-hidden="true">✓</span>
+                <span>{f}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Plus -->
+      <div class="reveal rounded-3xl border-2 border-teal bg-mist/40 p-7 shadow-soft" style="--reveal-delay:120ms">
+        <div class="flex items-center justify-between">
+          <h2 class="text-2xl">With Plus<FullStop /></h2>
+          <span class="rounded-full bg-teal px-3 py-1 text-xs font-semibold text-cream">
+            from {PLUS_PRICES.monthly}/mo
+          </span>
+        </div>
+        <p class="mt-2 text-sm text-soft">Everything in free, plus:</p>
+        <ul class="mt-5 space-y-4">
+          {
+            PLUS_BENEFITS.map((b) => (
+              <li class="flex items-start gap-3">
+                <span class="text-2xl" aria-hidden="true">{b.icon}</span>
+                <span>
+                  <span class="block font-semibold text-forest">{b.title}</span>
+                  <span class="mt-0.5 block text-sm leading-relaxed text-soft">{b.body}</span>
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="container-prose pb-4">
+    <h2 class="text-3xl sm:text-4xl">Simple pricing<FullStop /></h2>
+    <p class="mt-3 max-w-xl text-soft">
+      Two ways to pay — whichever suits you. Billed through Google Play; cancel any time
+      from your store account.
+    </p>
+    <div class="mt-8 grid gap-5 sm:grid-cols-2">
+      <!-- Monthly -->
+      <div class="reveal rounded-3xl border border-hairline bg-white/70 p-7 shadow-card">
+        <p class="text-sm font-semibold uppercase tracking-wide text-soft">Monthly</p>
+        <p class="mt-2">
+          <span class="font-display text-4xl text-forest">{PLUS_PRICES.monthly}</span>
+          <span class="text-soft"> / month</span>
+        </p>
+        <p class="mt-2 text-sm text-soft">Flexible — stop whenever you like.</p>
+      </div>
+
+      <!-- Yearly -->
+      <div class="reveal relative rounded-3xl border-2 border-teal bg-mist/40 p-7 shadow-soft" style="--reveal-delay:120ms">
+        <span
+          class="absolute right-5 top-5 rounded-full bg-terracotta px-3 py-1 text-xs font-semibold text-cream"
+        >
+          Save {PLUS_YEARLY_SAVING}
+        </span>
+        <p class="text-sm font-semibold uppercase tracking-wide text-soft">Yearly</p>
+        <p class="mt-2">
+          <span class="font-display text-4xl text-forest">{PLUS_PRICES.yearly}</span>
+          <span class="text-soft"> / year</span>
+        </p>
+        <p class="mt-2 text-sm text-soft">Best value for sticking with it.</p>
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <CtaButtons />
+    </div>
+  </section>
+
+  <!-- Honest notes -->
+  <section class="container-prose py-12 sm:py-14">
+    <div class="rounded-3xl border border-hairline bg-cream p-6 text-sm leading-relaxed text-soft">
+      <p>
+        <span class="font-semibold text-forest">A few honest notes.</span> Plus is entirely
+        optional — BeFree's core is free forever, and the crisis helpline is never gated.
+        App &amp; content blocking is available on Android first (iOS is on the way), uses a
+        private on-device filter, and asks only for the permissions each feature needs — all
+        revocable any time. Payments are handled by Google Play; we never see your card
+        details.
+      </p>
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="reveal container-prose pb-16 text-center">
+    <Sprout class="mx-auto mb-5 h-12 w-auto text-forest" />
+    <h2 class="text-3xl sm:text-4xl">Free to start, today<FullStop /></h2>
+    <p class="mx-auto mt-4 max-w-md text-soft">
+      Download BeFree and use it free. Upgrade to Plus from inside the app whenever it feels
+      right.
+    </p>
+    <div class="mt-8">
+      <CtaButtons align="center" />
+    </div>
+  </section>
+</Base>

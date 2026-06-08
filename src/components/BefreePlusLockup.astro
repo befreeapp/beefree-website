@@ -1,0 +1,21 @@
+---
+// The "Befree Plus" lockup as it appears in the app: the Befree wordmark with a
+// small "Plus" set against its top-right, rather than the words spelled out.
+interface Props {
+  class?: string;
+  // Tailwind height utility for the wordmark (e.g. 'h-8', 'h-10').
+  size?: string;
+}
+const { class: className = '', size = 'h-9' } = Astro.props;
+---
+<span class={`inline-flex items-start gap-1.5 ${className}`}>
+  <img
+    src="/assets/wordmark.png"
+    alt="Befree"
+    width="264"
+    height="100"
+    class={`${size} w-auto`}
+    decoding="async"
+  />
+  <span class="mt-0.5 text-base font-semibold leading-none text-teal">Plus</span>
+</span>

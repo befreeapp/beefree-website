@@ -1,0 +1,109 @@
+/* Self-hosted brand fonts (bundled by Astro/Vite — no third-party requests). */
+@import '@fontsource-variable/fraunces/index.css';
+@import '@fontsource-variable/hanken-grotesk/index.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-cream text-ink font-body antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-forest;
+    text-wrap: balance;
+  }
+
+  /* Calm, visible focus ring for keyboard users — accessibility first. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-teal ring-offset-2 ring-offset-cream rounded-lg;
+  }
+
+  /* Scroll-reveal: gentle fade + rise as elements enter the viewport.
+     Only active when motion is welcome; otherwise content shows immediately. */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+      transition-delay: var(--reveal-delay, 0ms);
+      will-change: opacity, transform;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Respect users who prefer less motion. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Generous, readable content column. */
+  .container-prose {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8;
+  }
+
+  /* Styling for markdown-rendered content (the privacy policy). */
+  .prose-befree {
+    @apply text-ink/90 leading-relaxed;
+  }
+  .prose-befree h1 {
+    @apply text-3xl sm:text-4xl mb-2;
+  }
+  .prose-befree h2 {
+    @apply text-2xl mt-10 mb-3;
+  }
+  .prose-befree h3 {
+    @apply text-xl mt-7 mb-2 text-teal;
+  }
+  .prose-befree p {
+    @apply my-4;
+  }
+  .prose-befree ul {
+    @apply my-4 list-disc pl-6 space-y-2;
+  }
+  .prose-befree a {
+    @apply text-teal underline underline-offset-2 hover:text-forest;
+  }
+  .prose-befree strong {
+    @apply text-forest font-semibold;
+  }
+  .prose-befree blockquote {
+    @apply my-6 rounded-2xl border border-hairline bg-mist/60 p-4 text-sm text-soft;
+  }
+  .prose-befree hr {
+    @apply my-8 border-hairline;
+  }
+  .prose-befree code {
+    @apply rounded bg-mist px-1.5 py-0.5 text-sm text-forest;
+  }
+}

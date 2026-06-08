@@ -1,0 +1,121 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'BeFree — Take back your time',
+  description = 'A kinder way to put the phone down — a supportive companion, gentle blocking, and real help. Free, private, no ads.',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL('/assets/og-image.png', Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="/assets/favicon.png" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#FBF6EC" />
+
+    <!-- Open Graph / social link previews -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="BeFree" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Brand fonts are self-hosted via @fontsource (imported in global.css) — no
+         third-party font requests, consistent with the privacy promise. -->
+
+    <!-- Without JS, the scroll-reveal elements must still be visible. -->
+    <noscript>
+      <style>
+        .reveal {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-forest focus:px-4 focus:py-2 focus:text-cream"
+      >Skip to content</a
+    >
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      // Reveal elements as they enter the viewport: above-the-fold items animate
+      // on load, the rest as you scroll. A plain scroll check (not
+      // IntersectionObserver) keeps it reliable everywhere. Reduced-motion users
+      // get everything shown at once.
+      const items = Array.from(document.querySelectorAll<HTMLElement>('.reveal'));
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Honour reduced-motion for the auto-playing hero video: pause it and let
+      // the poster stand in. Everyone else gets muted autoplay with controls.
+      if (reduce) {
+        document.querySelectorAll<HTMLVideoElement>('video[data-autoplay]').forEach((v) => {
+          v.autoplay = false;
+          v.removeAttribute('autoplay');
+          v.pause();
+        });
+      }
+
+      if (reduce) {
+        items.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        let pending = items;
+        let ticking = false;
+        const reveal = () => {
+          ticking = false;
+          const trigger = window.innerHeight * 0.9;
+          pending = pending.filter((el) => {
+            if (el.getBoundingClientRect().top < trigger) {
+              el.classList.add('is-visible');
+              return false;
+            }
+            return true;
+          });
+          if (!pending.length) {
+            window.removeEventListener('scroll', onScroll);
+            window.removeEventListener('resize', onScroll);
+          }
+        };
+        const onScroll = () => {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(reveal);
+          }
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
+        window.addEventListener('load', reveal);
+        // Defer the first pass a frame so the initial opacity:0 paints and the
+        // above-the-fold items animate in rather than snapping.
+        requestAnimationFrame(() => requestAnimationFrame(reveal));
+      }
+    </script>
+  </body>
+</html>

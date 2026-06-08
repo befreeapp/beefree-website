@@ -1,0 +1,47 @@
+---
+const { pathname } = Astro.url;
+const isActive = (href: string) =>
+  href === '/' ? pathname === '/' : pathname.startsWith(href);
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/plus', label: 'Plus' },
+  { href: '/support', label: 'Support' },
+  { href: '/privacy', label: 'Privacy' },
+];
+---
+<header class="w-full">
+  <nav
+    class="container-prose flex items-center justify-between py-5"
+    aria-label="Primary"
+  >
+    <a href="/" class="flex items-center gap-2" aria-label="Befree — home">
+      <img
+        src="/assets/wordmark.png"
+        alt="Befree"
+        width="264"
+        height="100"
+        class="h-12 w-auto"
+        decoding="async"
+      />
+    </a>
+    <ul class="flex items-center gap-5 text-sm font-medium sm:gap-7 sm:text-base">
+      {
+        navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class:list={[
+                'transition-colors hover:text-forest',
+                isActive(link.href) ? 'text-forest font-semibold' : 'text-soft',
+              ]}
+              aria-current={isActive(link.href) ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>

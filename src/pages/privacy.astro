@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import FullStop from '../components/FullStop.astro';
+// Single-sourced from the project's privacy-policy.md (copied into src/content).
+// Astro renders the markdown to a <Content /> component at build time.
+import { Content } from '../content/privacy-policy.md';
+---
+
+<Base
+  title="Privacy Policy — BeFree"
+  description="How BeFree handles your data: local-first, no ads, never sold. Read the full privacy policy."
+>
+  <article class="container-prose py-12">
+    <h1 class="sr-only">BeFree Privacy Policy</h1>
+    <p class="mb-8 rounded-2xl border border-hairline bg-mist/60 p-4 text-sm text-soft">
+      This page is single-sourced from our privacy policy. Some publish-time details
+      (effective date, legal entity, contact) are placeholders until launch<FullStop />
+    </p>
+    <div class="prose-befree">
+      <Content />
+    </div>
+  </article>
+</Base>

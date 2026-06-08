@@ -1,0 +1,230 @@
+---
+import Base from '../layouts/Base.astro';
+import FullStop from '../components/FullStop.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+import CtaButtons from '../components/CtaButtons.astro';
+import Arcs from '../components/Arcs.astro';
+import Sprout from '../components/Sprout.astro';
+import ScreenshotCarousel from '../components/ScreenshotCarousel.astro';
+import BefreePlusLockup from '../components/BefreePlusLockup.astro';
+import { PLUS_PRICES, PLUS_YEARLY_SAVING, PLUS_BENEFITS } from '../data/plus';
+
+const features = [
+  {
+    icon: '💬',
+    title: 'A companion on your side',
+    body: "Name your AI partner and talk anytime. A gentle nudge when you go quiet, a kind word after a slip — never a lecture.",
+  },
+  {
+    icon: '🛡️',
+    title: 'Block what pulls you in',
+    body: 'Choose apps to block on your schedule or by place, plus an on-device adult-content filter and an optional strict mode.',
+    badge: 'Plus',
+  },
+  {
+    icon: '🌱',
+    iconType: 'sprout',
+    title: 'Small wins, every day',
+    body: 'A simple daily check-in builds your streak. Honest check-ins are the whole practice — no judgement either way.',
+  },
+  {
+    icon: '💛',
+    title: 'Real help, one tap away',
+    body: 'Counselling, articles, and crisis lines — always free, and always close at hand when you need them.',
+  },
+];
+
+const values = [
+  { title: 'Free, always', body: 'No paywall on the core. No ads, ever.' },
+  { title: 'Private by design', body: 'Your data stays on your device. Never sold.' },
+  { title: 'A companion, not a warden', body: 'Support without shame, on your terms.' },
+  { title: 'You stay in control', body: 'Every permission is optional and reversible.' },
+];
+---
+
+<Base>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <Arcs
+      class="pointer-events-none absolute -right-40 -top-32 h-[34rem] w-[34rem] opacity-60 sm:-right-24 lg:hidden"
+    />
+
+    <!-- Desktop: wide landscape video banner across the top -->
+    <div class="reveal relative mx-auto hidden max-w-6xl px-5 pt-8 sm:px-8 lg:block">
+      <div
+        class="overflow-hidden rounded-3xl border border-hairline bg-white/60 shadow-soft"
+      >
+        <video
+          class="aspect-video w-full"
+          controls
+          playsinline
+          muted
+          loop
+          autoplay
+          preload="auto"
+          poster="/assets/feature-graphic.png"
+          data-autoplay
+        >
+          <source src="/assets/promo.mp4" type="video/mp4" />
+          Your browser doesn't support embedded video. BeFree pairs a supportive AI
+          companion with gentle app and content blocking.
+        </video>
+      </div>
+    </div>
+
+    <div class="container-prose relative pb-14 pt-8 sm:pt-10 lg:pt-12">
+      <div class="lg:flex lg:items-center lg:justify-between lg:gap-10">
+        <div class="reveal max-w-xl" style="--reveal-delay:120ms">
+          <h1 class="text-5xl leading-[1.05] sm:text-6xl">
+            Take back your time<FullStop />
+          </h1>
+          <p class="mt-5 text-lg leading-relaxed text-soft sm:text-xl">
+            A kinder way to put the phone down — a supportive companion, gentle
+            blocking, and real help. Free, private, no ads.
+          </p>
+        </div>
+        <div class="reveal mt-8 lg:mt-0 lg:shrink-0" style="--reveal-delay:240ms">
+          <CtaButtons />
+        </div>
+      </div>
+
+      <!-- Mobile / tablet: vertical video below the text, filling the width -->
+      <div
+        class="reveal mx-auto mt-10 w-full max-w-md overflow-hidden rounded-3xl border border-hairline bg-white/60 shadow-soft sm:max-w-lg lg:hidden"
+        style="--reveal-delay:120ms"
+      >
+        <video
+          class="aspect-[9/16] w-full"
+          controls
+          playsinline
+          muted
+          loop
+          autoplay
+          preload="auto"
+          poster="/assets/screenshot-01.png"
+          data-autoplay
+        >
+          <source src="/assets/promo-vertical.mp4" type="video/mp4" />
+          Your browser doesn't support embedded video. BeFree pairs a supportive AI
+          companion with gentle app and content blocking.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- What it is -->
+  <section class="container-prose py-12 sm:py-14">
+    <h2 class="reveal text-3xl sm:text-4xl">What it is<FullStop /></h2>
+    <p class="reveal mt-3 max-w-xl text-soft" style="--reveal-delay:80ms">
+      Four gentle ways it helps you spend less time pulled into the screen.
+    </p>
+    <div class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        features.map((f, i) => (
+          <FeatureCard
+            icon={f.icon}
+            iconType={f.iconType}
+            title={f.title}
+            body={f.body}
+            badge={f.badge}
+            index={i}
+          />
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Screenshots carousel -->
+  <div class="reveal">
+    <ScreenshotCarousel />
+  </div>
+
+  <!-- BeFree Plus -->
+  <section class="container-prose py-12 sm:py-14">
+    <div
+      class="reveal overflow-hidden rounded-3xl border border-hairline bg-mist/50 p-7 sm:p-10 lg:grid lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-12"
+    >
+      <div>
+        <BefreePlusLockup size="h-10" />
+        <h2 class="mt-4 text-3xl sm:text-4xl">Go a little further<FullStop /></h2>
+        <p class="mt-3 max-w-md text-soft">
+          BeFree is free to use. When you're ready for more, Plus unlocks deeper support —
+          starting at <span class="font-semibold text-forest">{PLUS_PRICES.monthly}/month</span>
+          (or {PLUS_PRICES.yearly}/year, saving {PLUS_YEARLY_SAVING}).
+        </p>
+        <div class="mt-6 flex flex-wrap items-center gap-3">
+          <a
+            href="/plus"
+            class="inline-flex items-center gap-2 rounded-2xl bg-forest px-5 py-3 font-semibold text-cream shadow-soft transition-transform hover:-translate-y-0.5"
+          >
+            See what's in Plus
+            <span aria-hidden="true">→</span>
+          </a>
+          <span class="text-xs text-soft">Optional. Cancel any time.</span>
+        </div>
+      </div>
+
+      <ul class="mt-8 space-y-4 lg:mt-0">
+        {
+          PLUS_BENEFITS.map((b) => (
+            <li class="flex items-start gap-3 rounded-2xl bg-white/70 p-4">
+              <span class="text-2xl" aria-hidden="true">{b.icon}</span>
+              <span>
+                <span class="block font-semibold text-forest">{b.title}</span>
+                <span class="mt-0.5 block text-sm leading-relaxed text-soft">{b.body}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Values strip -->
+  <section class="relative overflow-hidden bg-forest text-cream">
+    <Sprout
+      class="pointer-events-none absolute -right-10 -top-10 h-56 w-56 text-cream/5 sm:right-8 sm:h-72 sm:w-72"
+      dotColor="rgba(216,94,54,0.25)"
+    />
+    <div class="container-prose relative py-14 sm:py-16">
+      <h2 class="reveal text-3xl text-cream sm:text-4xl">Why it's different<FullStop /></h2>
+      <div class="reveal mt-8 grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 lg:grid-cols-4" style="--reveal-delay:120ms">
+        {
+          values.map((v) => (
+            <div class="border-l-2 border-terracotta pl-4">
+              <h3 class="text-cream">{v.title}</h3>
+              <p class="mt-1 text-sm leading-relaxed text-mist/80">{v.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="reveal container-prose py-16 text-center">
+    <Sprout class="mx-auto mb-6 h-16 w-auto text-forest" />
+    <img
+      src="/assets/wordmark.png"
+      alt="Befree"
+      width="264"
+      height="100"
+      class="mx-auto h-16 w-auto sm:h-20"
+      decoding="async"
+    />
+    <p class="mx-auto mt-5 max-w-md text-soft">
+      Start small, today. Every streak starts at day one — and checking in is the whole
+      practice.
+    </p>
+    <div class="mt-8">
+      <CtaButtons align="center" />
+    </div>
+    <p class="mx-auto mt-10 max-w-lg text-xs leading-relaxed text-soft">
+      BeFree is a support tool, not medical treatment. If you're struggling, please reach
+      out to a professional or a
+      <a href="/support#crisis" class="underline underline-offset-2 hover:text-forest"
+        >crisis line</a
+      >.
+    </p>
+  </section>
+</Base>
