@@ -6,15 +6,56 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title?: string;
   description?: string;
+  /** Override the social share image (absolute path under /assets). */
+  ogImage?: string;
+  /** og:type — "website" for most pages, "article" for the policy. */
+  ogType?: string;
+  /** Keep a page out of search results (none currently). */
+  noindex?: boolean;
+  /** Page-specific JSON-LD object(s), merged into the structured-data graph. */
+  schema?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
-  title = 'BeFree — Take back your time',
+  title = 'Befree — Take back your time',
   description = 'A kinder way to put the phone down — a supportive companion, gentle blocking, and real help. Free, private, no ads.',
+  ogImage = '/assets/og-image.png',
+  ogType = 'website',
+  noindex = false,
+  schema,
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site).href;
-const ogImage = new URL('/assets/og-image.png', Astro.site).href;
+const site = Astro.site!;
+const canonical = new URL(Astro.url.pathname, site).href;
+const ogImageUrl = new URL(ogImage, site).href;
+const ogImageAlt = 'Befree — a calm app to reduce compulsive phone use';
+
+// Site-wide structured data (Organization + WebSite), present on every page.
+const baseGraph = [
+  {
+    '@type': 'Organization',
+    '@id': new URL('/#org', site).href,
+    name: 'Befree',
+    url: site.href,
+    logo: new URL('/assets/icon.png', site).href,
+    description:
+      'Befree is a free app that helps people gently reduce compulsive phone use with a supportive AI companion, app and content blocking, and daily check-ins.',
+    email: 'info@befreeapp.net',
+  },
+  {
+    '@type': 'WebSite',
+    '@id': new URL('/#website', site).href,
+    name: 'Befree',
+    url: site.href,
+    publisher: { '@id': new URL('/#org', site).href },
+    inLanguage: 'en',
+  },
+];
+const pageSchema = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [...baseGraph, ...pageSchema],
+};
 ---
 
 <!doctype html>
@@ -27,18 +68,32 @@ const ogImage = new URL('/assets/og-image.png', Astro.site).href;
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#FBF6EC" />
+    <meta
+      name="robots"
+      content={noindex
+        ? 'noindex, nofollow'
+        : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
+    />
 
     <!-- Open Graph / social link previews -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="BeFree" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Befree" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
+
+    <!-- Structured data (schema.org) for rich results -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
     <!-- Brand fonts are self-hosted via @fontsource (imported in global.css) — no
          third-party font requests, consistent with the privacy promise. -->

@@ -44,11 +44,21 @@ const crisisLines = [
     action: 'findahelpline.com',
   },
 ];
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 
 <Base
-  title="Support & Contact — BeFree"
-  description="Get in touch with BeFree, read common questions, and find crisis resources that are always free."
+  title="Support & crisis resources — Befree"
+  description="Get help with Befree, read common questions, and find free 24/7 crisis lines (Samaritans 116 123, US 988, findahelpline.com). We're here for you."
+  schema={faqSchema}
 >
   <div class="container-prose py-12">
     <h1 class="reveal text-4xl sm:text-5xl">We're here to help<FullStop /></h1>

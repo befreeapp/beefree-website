@@ -40,9 +40,25 @@ const values = [
   { title: 'A companion, not a warden', body: 'Support without shame, on your terms.' },
   { title: 'You stay in control', body: 'Every permission is optional and reversible.' },
 ];
+
+const appSchema = {
+  '@type': 'MobileApplication',
+  name: 'Befree',
+  operatingSystem: 'Android',
+  applicationCategory: 'HealthApplication',
+  url: Astro.site!.href,
+  description:
+    'Befree helps you gently reduce compulsive phone use — social media, doomscrolling, adult content and games — with a supportive AI companion, app and content blocking, and daily check-ins.',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
+  publisher: { '@id': new URL('/#org', Astro.site!).href },
+};
 ---
 
-<Base>
+<Base
+  title="Befree — Free app to gently reduce screen time & phone use"
+  description="Spend less time doomscrolling. Befree pairs a supportive AI companion with gentle app & content blocking and daily check-ins to help you reduce compulsive phone use. Free, private, no ads."
+  schema={appSchema}
+>
   <!-- Hero -->
   <section class="relative overflow-hidden">
     <Arcs
