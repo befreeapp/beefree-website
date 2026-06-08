@@ -125,6 +125,31 @@ const groups = [
     }
   }
 
+  /* On phones: swipe through the screenshots instead of auto-scrolling. */
+  @media (max-width: 767px) {
+    .marquee {
+      overflow-x: auto;
+      scroll-snap-type: x proximity;
+      scroll-padding: 0 1rem;
+      -webkit-overflow-scrolling: touch;
+      -webkit-mask-image: none;
+      mask-image: none;
+      scrollbar-width: none;
+    }
+    .marquee::-webkit-scrollbar {
+      display: none;
+    }
+    .marquee__track {
+      animation: none;
+    }
+    .marquee__group[aria-hidden='true'] {
+      display: none;
+    }
+    .marquee__item {
+      scroll-snap-align: center;
+    }
+  }
+
   /* Lightbox */
   .lightbox {
     position: fixed;

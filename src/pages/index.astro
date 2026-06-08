@@ -89,25 +89,9 @@ const appSchema = {
     </div>
 
     <div class="container-prose relative pb-14 pt-8 sm:pt-10 lg:pt-12">
-      <div class="lg:flex lg:items-center lg:justify-between lg:gap-10">
-        <div class="reveal max-w-xl" style="--reveal-delay:120ms">
-          <h1 class="text-5xl leading-[1.05] sm:text-6xl">
-            Take back your time<FullStop />
-          </h1>
-          <p class="mt-5 text-lg leading-relaxed text-soft sm:text-xl">
-            A kinder way to put the phone down — a supportive companion, gentle
-            blocking, and real help. Free, private, no ads.
-          </p>
-        </div>
-        <div class="reveal mt-8 lg:mt-0 lg:shrink-0" style="--reveal-delay:240ms">
-          <CtaButtons />
-        </div>
-      </div>
-
-      <!-- Mobile / tablet: vertical video below the text, filling the width -->
+      <!-- Mobile / tablet: vertical video at the top, filling the width -->
       <div
-        class="reveal mx-auto mt-10 w-full max-w-md overflow-hidden rounded-3xl border border-hairline bg-white/60 shadow-soft sm:max-w-lg lg:hidden"
-        style="--reveal-delay:120ms"
+        class="reveal mx-auto mb-10 w-full max-w-md overflow-hidden rounded-3xl border border-hairline bg-white/60 shadow-soft sm:max-w-lg lg:hidden"
       >
         <video
           class="aspect-[9/16] w-full"
@@ -124,6 +108,21 @@ const appSchema = {
           Your browser doesn't support embedded video. BeFree pairs a supportive AI
           companion with gentle app and content blocking.
         </video>
+      </div>
+
+      <div class="lg:flex lg:items-center lg:justify-between lg:gap-10">
+        <div class="reveal max-w-xl" style="--reveal-delay:120ms">
+          <h1 class="text-5xl leading-[1.05] sm:text-6xl">
+            Take back your time<FullStop />
+          </h1>
+          <p class="mt-5 text-lg leading-relaxed text-soft sm:text-xl">
+            A kinder way to put the phone down — a supportive companion, gentle
+            blocking, and real help. Free, private, no ads.
+          </p>
+        </div>
+        <div class="reveal mt-8 lg:mt-0 lg:shrink-0" style="--reveal-delay:240ms">
+          <CtaButtons />
+        </div>
       </div>
     </div>
   </section>
