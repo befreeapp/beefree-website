@@ -91,6 +91,9 @@
   .prose-befree ul {
     @apply my-4 list-disc pl-6 space-y-2;
   }
+  .prose-befree ol {
+    @apply my-4 list-decimal pl-6 space-y-2;
+  }
   .prose-befree a {
     @apply text-teal underline underline-offset-2 hover:text-forest;
   }

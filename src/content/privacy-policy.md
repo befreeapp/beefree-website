@@ -1,10 +1,6 @@
 # BeFree — Privacy Policy
 
-**Effective date: [SET AT PUBLISH]**  ·  **Last updated: 6 June 2026**
-
-> ⚠️ Placeholders to replace before publishing: the **effective date** and the
-> **company/legal entity name + address**. Host this at a public URL and put that URL in
-> the Play Console listing. Have it reviewed by a lawyer alongside the other compliance items.
+**Effective date: 10 July 2026**  ·  **Last updated: 10 July 2026**
 
 BeFree ("BeFree", "we", "us") helps people reduce compulsive phone use with a
 supportive AI companion, optional on-device app/content blocking, and a library of
@@ -116,4 +112,7 @@ and, for material changes, surface a notice in the app.
 
 ## Contact
 Questions or requests: **info@befreeapp.net**.
-[Company/legal entity name and address to be added before publishing.]
+
+BeFree is operated by Patrick Gillespie, an independent developer based in the
+United Kingdom. If BeFree's operation moves to a company, we'll update this policy
+with the new entity's details.

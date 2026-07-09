@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+// Google Play "delete account" URL target: must name the app, give the deletion
+// steps prominently, and state what's deleted/kept + retention.
+---
+
+<Base
+  title="Delete your account — Befree"
+  description="How to delete your BeFree account and data — in the app or by email — and exactly what gets erased."
+  ogType="article"
+>
+  <article class="container-prose py-12">
+    <div class="prose-befree">
+      <h1>Delete your BeFree account &amp; data</h1>
+      <p>
+        BeFree is built local-first, so most of your data only ever lives on your
+        phone. Deleting is quick, and it's yours to do at any time.
+      </p>
+
+      <h2>In the app (instant)</h2>
+      <ol>
+        <li>Open BeFree and go to the <strong>Account</strong> tab.</li>
+        <li>Scroll to the <strong>Danger zone</strong>.</li>
+        <li>Tap <strong>Delete account &amp; data</strong> and confirm.</li>
+      </ol>
+      <p>
+        This erases everything on your device and, if you used cloud backup, deletes
+        your account and all backed-up data from our servers immediately.
+      </p>
+
+      <h2>Can't access the app?</h2>
+      <p>
+        Email <a href="mailto:info@befreeapp.net">info@befreeapp.net</a> with the
+        subject <strong>"Delete my account"</strong>, from the email address you used
+        for cloud backup. We'll verify it's you and delete your account and backed-up
+        data within <strong>30 days</strong>.
+      </p>
+
+      <h2>What's deleted, what's kept</h2>
+      <ul>
+        <li>
+          <strong>Deleted from our servers:</strong> your backup account (your email
+          address) and any backed-up data — check-ins, streaks, and wins. We keep
+          nothing after deletion.
+        </li>
+        <li>
+          <strong>Deleted from your phone:</strong> chats with your AI companion,
+          blocking rules, places, and all other app data (in-app deletion clears
+          this; uninstalling the app also removes it). Chat transcripts are never
+          stored on our servers.
+        </li>
+        <li>
+          <strong>Kept (by Google, not us):</strong> if you subscribed to BeFree
+          Plus, Google Play holds your billing records under Google's policies —
+          manage or cancel the subscription in the Play Store. BeFree never sees
+          your payment details.
+        </li>
+      </ul>
+
+      <p>
+        Questions? See our <a href="/privacy">privacy policy</a> or email
+        <a href="mailto:info@befreeapp.net">info@befreeapp.net</a>.
+      </p>
+    </div>
+  </article>
+</Base>
