@@ -113,6 +113,5 @@ and, for material changes, surface a notice in the app.
 ## Contact
 Questions or requests: **info@befreeapp.net**.
 
-BeFree is operated by Patrick Gillespie, an independent developer based in the
-United Kingdom. If BeFree's operation moves to a company, we'll update this policy
-with the new entity's details.
+BeFree is operated by **Ethicaa Ltd**, a company registered in England and Wales
+(company no. 17331429).
