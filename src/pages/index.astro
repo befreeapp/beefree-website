@@ -12,13 +12,13 @@ import { PLUS_PRICES, PLUS_YEARLY_SAVING, PLUS_BENEFITS } from '../data/plus';
 const features = [
   {
     icon: '💬',
-    title: 'A companion on your side',
-    body: "Name your AI partner and talk anytime. A gentle nudge when you go quiet, a kind word after a slip — never a lecture.",
+    title: 'Your AI accountability partner',
+    body: 'A companion you name and talk to anytime — a gentle nudge when you go quiet, a kind word after a slip. Never a lecture.',
   },
   {
     icon: '🛡️',
     title: 'Block what pulls you in',
-    body: 'Choose apps to block on your schedule or by place, plus an on-device adult-content filter and an optional strict mode.',
+    body: 'A built-in app blocker for the apps that pull you in — block on a schedule or by place, plus an on-device adult-content filter and strict mode.',
     badge: 'Plus',
   },
   {
@@ -48,15 +48,15 @@ const appSchema = {
   applicationCategory: 'HealthApplication',
   url: Astro.site!.href,
   description:
-    'Befree helps you gently reduce compulsive phone use — social media, doomscrolling, adult content and games — with a supportive AI companion, app and content blocking, and daily check-ins.',
+    'Befree is a free app for phone addiction — an AI accountability partner, an app blocker and content filter, and daily check-ins to help you spend less time on your phone.',
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
   publisher: { '@id': new URL('/#org', Astro.site!).href },
 };
 ---
 
 <Base
-  title="Befree — Free app to reduce screen time & phone use"
-  description="Reduce screen time the kind way — a supportive AI companion, gentle app blocking and daily check-ins. Free, private, no ads."
+  title="Befree — ease phone addiction: AI partner & app blocker"
+  description="Ease phone addiction the kind way — an AI accountability partner, an app blocker, and daily check-ins. Free, private, no ads."
   schema={appSchema}
 >
   <!-- Hero -->
@@ -116,8 +116,8 @@ const appSchema = {
             Take back your time<FullStop />
           </h1>
           <p class="mt-5 text-lg leading-relaxed text-soft sm:text-xl">
-            A kinder way to put the phone down — a supportive companion, gentle
-            blocking, and real help. Free, private, no ads.
+            A kinder way to ease phone addiction — an AI accountability partner, an
+            app blocker, and support when you need it. Free, private, no ads.
           </p>
         </div>
         <div class="reveal mt-8 lg:mt-0 lg:shrink-0" style="--reveal-delay:240ms">
@@ -131,7 +131,8 @@ const appSchema = {
   <section class="container-prose py-12 sm:py-14">
     <h2 class="reveal text-3xl sm:text-4xl">What it is<FullStop /></h2>
     <p class="reveal mt-3 max-w-xl text-soft" style="--reveal-delay:80ms">
-      Four gentle ways it helps you spend less time pulled into the screen.
+      Gentle, practical help for phone addiction — four calm ways to spend less time
+      pulled into your screen.
     </p>
     <div class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
       {

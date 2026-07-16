@@ -24,7 +24,7 @@ export const PLUS_BENEFITS: PlusBenefit[] = [
   {
     icon: '🛡️',
     title: 'App & content blocking',
-    body: 'Lock the apps that pull you in and filter sites during your focus hours.',
+    body: 'A full app blocker: lock the apps that pull you in and filter sites during your focus hours.',
   },
   {
     icon: '💌',

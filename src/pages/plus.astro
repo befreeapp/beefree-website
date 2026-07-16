@@ -15,7 +15,7 @@ const plusSchema = {
   applicationCategory: 'HealthApplication',
   url: new URL('/plus', Astro.site!).href,
   description:
-    'Befree Plus adds unlimited AI chat, app & content blocking, and partner check-ins to the free Befree app.',
+    'Befree Plus adds a full app blocker and content filter, unlimited AI chat, and partner check-ins to the free Befree app.',
   publisher: { '@id': new URL('/#org', Astro.site!).href },
   offers: [
     { '@type': 'Offer', name: 'Monthly', price: monthly, priceCurrency: 'GBP' },
@@ -25,8 +25,8 @@ const plusSchema = {
 ---
 
 <Base
-  title="Befree Plus — unlimited AI chat & app blocking"
-  description="Go further with Befree Plus: unlimited AI chat, app & content blocking, and partner check-ins — from £3.99/month."
+  title="Befree Plus — app blocker, content filter & AI chat"
+  description="Befree Plus adds a full app blocker and content filter, unlimited AI chat, and partner check-ins — from £3.99/month."
   schema={plusSchema}
 >
   <!-- Hero -->
