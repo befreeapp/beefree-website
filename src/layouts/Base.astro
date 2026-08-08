@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { PLAY_URL } from '../data/links';
 
 interface Props {
   title?: string;
@@ -41,6 +42,7 @@ const baseGraph = [
     description:
       'Befree is a free app that helps people gently reduce compulsive phone use with a supportive AI companion, app and content blocking, and daily check-ins.',
     email: 'info@befreeapp.net',
+    sameAs: [PLAY_URL],
   },
   {
     '@type': 'WebSite',
