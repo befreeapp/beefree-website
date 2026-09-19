@@ -33,7 +33,11 @@ const { src, poster, label, caption, class: className = '' } = Astro.props;
       <span class="film__playIcon" aria-hidden="true">▶</span>
     </button>
   </div>
-  {caption && <figcaption class="mt-3 text-center text-xs text-soft">{caption}</figcaption>}
+  <figcaption class="mt-3 text-center text-xs leading-relaxed text-soft">
+    {caption && <span class="block">{caption}</span>}
+    {/* Attribution required alongside any player using these campaign tracks. */}
+    <span class="block">Music: Made with ElevenMusic.</span>
+  </figcaption>
 </figure>
 
 <style>
