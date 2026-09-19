@@ -1,0 +1,36 @@
+---
+// The campaign's signature sweeping curve, used to hand one colour block over
+// to the next. Purely decorative — the sections either side carry the meaning.
+interface Props {
+  /** Colour the curve sweeps *into* (the section below). */
+  fill?: string;
+  /** Mirror horizontally, so consecutive curves don't all lean the same way. */
+  flip?: boolean;
+  /** Shallow for tight joins, deep for a big editorial sweep. */
+  depth?: 'shallow' | 'deep';
+  class?: string;
+}
+const {
+  fill = '#0F3D39',
+  flip = false,
+  depth = 'deep',
+  class: className = '',
+} = Astro.props;
+
+const paths = {
+  deep: 'M0,140 L0,52 C 300,-32 760,118 1080,44 C 1240,7 1360,18 1440,34 L1440,140 Z',
+  shallow: 'M0,70 L0,34 C 340,-14 820,70 1180,26 C 1300,11 1380,14 1440,20 L1440,70 Z',
+};
+const viewBox = depth === 'deep' ? '0 0 1440 140' : '0 0 1440 70';
+---
+<svg
+  class={`-mb-px block w-full ${depth === 'deep' ? 'h-[70px] sm:h-[110px]' : 'h-[40px] sm:h-[60px]'} ${className}`}
+  viewBox={viewBox}
+  preserveAspectRatio="none"
+  aria-hidden="true"
+  focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  style={flip ? 'transform: scaleX(-1)' : undefined}
+>
+  <path d={paths[depth]} fill={fill} />
+</svg>

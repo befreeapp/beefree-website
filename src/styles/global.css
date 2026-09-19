@@ -72,6 +72,64 @@
     @apply mx-auto w-full max-w-content px-5 sm:px-8;
   }
 
+  /* ---- Campaign design language -------------------------------------- */
+
+  /* Letterspaced label above a statement heading, e.g. "01 / DAILY CHECK-IN". */
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-teal sm:text-sm;
+  }
+  .eyebrow--onForest {
+    @apply text-mist/70;
+  }
+
+  /* Speech bubble card with a pointed tail, as used across the campaign. */
+  .bubble {
+    @apply relative rounded-[1.75rem] bg-cream p-6 shadow-card sm:p-8;
+  }
+  .bubble::after {
+    content: '';
+    position: absolute;
+    left: 2.75rem;
+    bottom: -1.05rem;
+    width: 0;
+    height: 0;
+    border-left: 1.1rem solid transparent;
+    border-right: 1.1rem solid transparent;
+    border-top: 1.1rem solid #fbf6ec;
+  }
+  .bubble--onMist::after {
+    border-top-color: #fbf6ec;
+  }
+
+  /* Photography held inside a big organic curve — the campaign's signature
+     way of pairing an image with a colour block. */
+  .photo-curve {
+    @apply overflow-hidden shadow-soft;
+    border-radius: 14rem 2rem 14rem 2rem;
+  }
+  .photo-curve--alt {
+    border-radius: 2rem 14rem 2rem 14rem;
+  }
+  .photo-curve--wide {
+    @apply overflow-hidden shadow-soft;
+    border-radius: 12rem 12rem 2rem 2rem;
+  }
+
+  /* Soft paper grain, so large flat colour fields feel printed rather than
+     digital. Very low contrast; decorative only. */
+  .paper {
+    position: relative;
+  }
+  .paper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+  }
+
   /* Styling for markdown-rendered content (the privacy policy). */
   .prose-befree {
     @apply text-ink/90 leading-relaxed;

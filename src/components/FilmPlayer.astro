@@ -1,0 +1,101 @@
+---
+// A campaign film. These carry voiceover, so they are never autoplayed muted —
+// the poster invites a tap and the film plays with sound. `preload="none"`
+// keeps the page light: nothing downloads until someone chooses to watch.
+interface Props {
+  src: string;
+  poster: string;
+  /** Accessible description of the film. */
+  label: string;
+  /** Short line under the player. */
+  caption?: string;
+  class?: string;
+}
+const { src, poster, label, caption, class: className = '' } = Astro.props;
+---
+<figure class={`mx-auto w-full max-w-[19rem] sm:max-w-[21rem] ${className}`}>
+  <div
+    class="film relative overflow-hidden rounded-[2rem] border border-hairline bg-forest shadow-soft"
+    data-film
+  >
+    <video
+      class="aspect-[9/16] w-full"
+      controls
+      playsinline
+      preload="none"
+      poster={poster}
+      aria-label={label}
+    >
+      <source src={src} type="video/mp4" />
+      Your browser doesn’t support embedded video.
+    </video>
+    <button type="button" class="film__play" data-film-play aria-label={`Play: ${label}`}>
+      <span class="film__playIcon" aria-hidden="true">▶</span>
+    </button>
+  </div>
+  {caption && <figcaption class="mt-3 text-center text-xs text-soft">{caption}</figcaption>}
+</figure>
+
+<style>
+  .film__play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    border: 0;
+    cursor: pointer;
+    color: #fbf6ec;
+    background: radial-gradient(
+      circle at center,
+      rgba(15, 61, 57, 0.28) 0%,
+      rgba(15, 61, 57, 0.1) 55%,
+      rgba(15, 61, 57, 0.04) 100%
+    );
+  }
+  .film__playIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.25rem;
+    height: 4.25rem;
+    font-size: 1.35rem;
+    padding-left: 0.28rem;
+    color: #0f3d39;
+    background: #fbf6ec;
+    border-radius: 9999px;
+    box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.55);
+    transition: transform 0.2s ease;
+  }
+  .film__play:hover .film__playIcon,
+  .film__play:focus-visible .film__playIcon {
+    transform: scale(1.06);
+  }
+  .film[data-playing] .film__play {
+    display: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .film__playIcon { transition: none; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-film]').forEach((wrap) => {
+    const video = wrap.querySelector('video') as HTMLVideoElement | null;
+    const button = wrap.querySelector('[data-film-play]') as HTMLElement | null;
+    if (!video || !button) return;
+
+    button.addEventListener('click', () => {
+      wrap.setAttribute('data-playing', '');
+      video.play().catch(() => {
+        // If playback is refused, put the poster overlay back rather than
+        // leaving the viewer staring at a still frame with no way in.
+        wrap.removeAttribute('data-playing');
+      });
+    });
+    // Bring the invitation back once the film finishes.
+    video.addEventListener('ended', () => wrap.removeAttribute('data-playing'));
+  });
+</script>
