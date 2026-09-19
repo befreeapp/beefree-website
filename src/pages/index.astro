@@ -7,6 +7,7 @@ import Sprout from '../components/Sprout.astro';
 import Curve from '../components/Curve.astro';
 import FilmPlayer from '../components/FilmPlayer.astro';
 import ScreenshotCarousel from '../components/ScreenshotCarousel.astro';
+import Photo from '../components/Photo.astro';
 import BefreePlusLockup from '../components/BefreePlusLockup.astro';
 import { PLUS_PRICES, PLUS_YEARLY_SAVING, PLUS_BENEFITS, FREE_FEATURES } from '../data/plus';
 import { PLAY_URL } from '../data/links';
@@ -65,16 +66,20 @@ const appSchema = {
 >
   <!-- ================= HERO ================= -->
   <section class="paper relative overflow-hidden">
-    <div class="container-prose relative pb-10 pt-4 sm:pt-8 lg:pb-16 lg:pt-10">
+    <div class="container-prose relative pb-8 pt-3 sm:pt-6 lg:pb-12 lg:pt-8">
       <!-- Grid placement rather than DOM order, so the film sits between the
            headline and the store buttons on mobile, but beside them on desktop —
            without duplicating the buttons. -->
-      <div class="grid gap-y-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:gap-x-14">
+      <!-- rows [auto,1fr] so the taller film column doesn't push the buttons
+           away from the copy — spare height goes below them instead. -->
+      <div
+        class="grid gap-y-7 lg:grid-cols-[1.05fr_0.95fr] lg:grid-rows-[auto_1fr] lg:items-start lg:gap-x-12"
+      >
         <div class="reveal max-w-xl lg:col-start-1 lg:row-start-1" style="--reveal-delay:80ms">
-          <h1 class="text-5xl leading-[1.02] sm:text-6xl lg:text-7xl">
+          <h1 class="text-[2.6rem] leading-[1.04] sm:text-5xl lg:text-6xl">
             Take back your time<FullStop />
           </h1>
-          <p class="mt-5 text-lg leading-relaxed text-soft sm:mt-6 sm:text-xl">
+          <p class="mt-5 text-base leading-relaxed text-soft sm:mt-5 sm:text-lg">
             A kinder way to ease phone addiction — an AI accountability partner, an
             app blocker, and support when you need it. Free, private, no ads.
           </p>
@@ -111,25 +116,23 @@ const appSchema = {
 
   <!-- ============ MAKE ROOM FOR REAL LIFE ============ -->
   <section class="paper bg-forest text-cream">
-    <div class="container-prose py-9 sm:py-16">
+    <div class="container-prose py-8 sm:py-12">
       <p class="eyebrow eyebrow--onForest reveal">A kinder way</p>
-      <h2 class="reveal mt-3 max-w-2xl text-[2rem] text-cream sm:text-5xl" style="--reveal-delay:60ms">
+      <h2 class="reveal mt-3 max-w-2xl text-[1.7rem] text-cream sm:text-[2.35rem]" style="--reveal-delay:60ms">
         Make room for real life<FullStop />
       </h2>
-      <p class="reveal mt-5 max-w-xl text-lg leading-relaxed text-mist/80" style="--reveal-delay:120ms">
+      <p class="reveal mt-5 max-w-xl text-base leading-relaxed text-mist/80 sm:text-lg" style="--reveal-delay:120ms">
         An unhurried cup of tea. A chapter of that book. A conversation without checking
         your screen. You don’t have to give up your phone to want a little more space
         from it.
       </p>
-      <img
+      <Photo
         src="/assets/photo/be-here.webp"
         alt="Two people sharing a pot of tea and biscuits at a sunlit garden table."
-        width="954"
-        height="380"
-        loading="lazy"
-        decoding="async"
-        class="photo-curve--wide reveal mt-8 h-auto sm:mt-10 w-full object-cover"
-        style="--reveal-delay:160ms"
+        width={954}
+        height={380}
+        shape="wide"
+        class="reveal mt-7 h-44 w-full sm:mt-9 sm:h-auto"
       />
     </div>
   </section>
@@ -139,9 +142,9 @@ const appSchema = {
   </div>
 
   <!-- ================= WHAT IT IS ================= -->
-  <section class="container-prose py-9 sm:py-16">
+  <section class="container-prose py-8 sm:py-12">
     <p class="eyebrow reveal">Inside BeFree</p>
-    <h2 class="reveal mt-3 text-[2rem] sm:text-5xl" style="--reveal-delay:60ms">
+    <h2 class="reveal mt-3 text-[1.7rem] sm:text-[2.35rem]" style="--reveal-delay:60ms">
       What it is<FullStop />
     </h2>
     <p class="reveal mt-4 max-w-xl text-soft" style="--reveal-delay:120ms">
@@ -173,16 +176,18 @@ const appSchema = {
 
   <!-- ============ ONE SLIP ISN'T THE WHOLE STORY ============ -->
   <section class="paper relative overflow-hidden bg-forest text-cream">
+    <!-- Clipped by one edge only, so it reads as a deliberate arc rather than a
+         sliced circle; the content keeps a clear lane beside it. -->
     <span
-      class="pointer-events-none absolute -right-20 -top-16 h-56 w-56 rounded-full bg-terracotta/90 sm:h-72 sm:w-72"
+      class="pointer-events-none absolute -right-16 top-1/2 hidden h-64 w-64 -translate-y-1/2 rounded-full bg-terracotta/90 lg:block"
       aria-hidden="true"></span>
-    <div class="container-prose relative py-10 sm:py-20">
+    <div class="container-prose relative py-8 sm:py-12 lg:pr-40">
       <div class="max-w-2xl">
         <p class="eyebrow eyebrow--onForest reveal">A kinder perspective</p>
-        <h2 class="reveal mt-3 text-[2rem] leading-[1.05] text-cream sm:text-5xl" style="--reveal-delay:60ms">
+        <h2 class="reveal mt-3 text-[1.7rem] leading-[1.06] text-cream sm:text-[2.35rem]" style="--reveal-delay:60ms">
           One slip isn’t the whole story<FullStop />
         </h2>
-        <p class="reveal mt-5 text-lg leading-relaxed text-mist/85" style="--reveal-delay:120ms">
+        <p class="reveal mt-5 text-base leading-relaxed text-mist/85 sm:text-lg" style="--reveal-delay:120ms">
           Pause. Take a breath. Begin again when you’re ready. A streak is a record —
           not a verdict.
         </p>
@@ -209,15 +214,15 @@ const appSchema = {
   </div>
 
   <!-- ================= FREE & PLUS ================= -->
-  <section class="container-prose py-9 sm:py-16">
+  <section class="container-prose py-8 sm:py-12">
     <p class="eyebrow reveal">Free &amp; Plus</p>
-    <h2 class="reveal mt-3 text-[2rem] sm:text-5xl" style="--reveal-delay:60ms">
+    <h2 class="reveal mt-3 text-[1.7rem] sm:text-[2.35rem]" style="--reveal-delay:60ms">
       Pick what supports you<FullStop />
     </h2>
 
     <div class="mt-7 grid sm:mt-9 gap-6 lg:grid-cols-[1fr_1fr] lg:items-start">
       <!-- Free -->
-      <div class="reveal rounded-[1.75rem] border border-hairline bg-white/70 p-6 shadow-card sm:p-7">
+      <div class="reveal rounded-2xl border border-hairline bg-white/70 p-6 shadow-card sm:p-7">
         <div class="flex items-center gap-2">
           <Sprout class="h-7 w-auto text-teal" />
           <h3 class="text-2xl">Start free<FullStop /></h3>
@@ -237,7 +242,7 @@ const appSchema = {
 
       <!-- Plus -->
       <div
-        class="reveal rounded-[1.75rem] border-2 border-teal bg-mist/40 p-6 shadow-soft sm:p-7"
+        class="reveal rounded-2xl border-2 border-teal bg-mist/40 p-6 shadow-soft sm:p-7"
         style="--reveal-delay:120ms"
       >
         <BefreePlusLockup size="h-8" />
@@ -276,12 +281,12 @@ const appSchema = {
 
   <!-- ================= CLOSING ================= -->
   <section class="paper relative overflow-hidden">
-    <div class="container-prose py-10 sm:py-20">
+    <div class="container-prose py-9 sm:py-14">
       <div class="lg:grid lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-14">
         <div class="reveal order-2 lg:order-1">
-          <Sprout class="mb-5 h-14 w-auto text-forest" />
-          <h2 class="text-[2rem] leading-[1.05] sm:text-5xl">Your next chapter<FullStop /></h2>
-          <p class="mt-5 max-w-md text-lg leading-relaxed text-soft">
+          <Sprout class="mb-4 h-11 w-auto text-forest" />
+          <h2 class="text-[1.7rem] leading-[1.06] sm:text-[2.35rem]">Your next chapter<FullStop /></h2>
+          <p class="mt-5 max-w-md text-base leading-relaxed text-soft sm:text-lg">
             A little less scrolling. A little more of what you love. Start with one
             honest check-in — today.
           </p>
@@ -297,14 +302,13 @@ const appSchema = {
           </p>
         </div>
         <div class="reveal order-1 mb-9 lg:order-2 lg:mb-0" style="--reveal-delay:120ms">
-          <img
+          <Photo
             src="/assets/photo/next-chapter.webp"
             alt="An open book resting on a sunlit park bench, surrounded by green leaves."
-            width="394"
-            height="660"
-            loading="lazy"
-            decoding="async"
-            class="photo-curve--alt mx-auto h-60 w-full max-w-[22rem] object-cover sm:h-auto lg:max-w-none"
+            width={394}
+            height={660}
+            shape="curveAlt"
+            class="mx-auto h-52 w-full max-w-[20rem] sm:h-auto lg:max-w-none"
           />
         </div>
       </div>

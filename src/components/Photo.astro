@@ -1,0 +1,32 @@
+---
+// Campaign photography: an organic curved frame plus the warm grade and grain
+// that the social posts use, so photos on the site and in the feed match.
+interface Props {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  /** Which of the campaign's curve shapes to cut the photo into. */
+  shape?: 'curve' | 'curveAlt' | 'wide';
+  loading?: 'lazy' | 'eager';
+  class?: string;
+}
+const {
+  src,
+  alt,
+  width,
+  height,
+  shape = 'curve',
+  loading = 'lazy',
+  class: className = '',
+} = Astro.props;
+
+const shapes = {
+  curve: 'photo-curve',
+  curveAlt: 'photo-curve--alt',
+  wide: 'photo-curve--wide',
+};
+---
+<div class={`photo ${shapes[shape]} ${className}`}>
+  <img src={src} alt={alt} width={width} height={height} loading={loading} decoding="async" />
+</div>

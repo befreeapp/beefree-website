@@ -13,9 +13,9 @@ interface Props {
 }
 const { src, poster, label, caption, class: className = '' } = Astro.props;
 ---
-<figure class={`mx-auto w-full max-w-[19rem] sm:max-w-[21rem] ${className}`}>
+<figure class={`mx-auto w-full max-w-[16rem] sm:max-w-[17.5rem] ${className}`}>
   <div
-    class="film relative overflow-hidden rounded-[2rem] border border-hairline bg-forest shadow-soft"
+    class="film relative overflow-hidden rounded-2xl border border-hairline bg-forest shadow-soft"
     data-film
   >
     <video
@@ -63,8 +63,8 @@ const { src, poster, label, caption, class: className = '' } = Astro.props;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 4.25rem;
-    height: 4.25rem;
+    width: 3.4rem;
+    height: 3.4rem;
     font-size: 1.35rem;
     padding-left: 0.28rem;
     color: #0f3d39;

@@ -38,12 +38,12 @@ const stores = [
           target={s.live ? '_blank' : undefined}
           rel={s.live ? 'noopener noreferrer' : undefined}
           aria-disabled={s.live ? undefined : 'true'}
-          class="inline-flex items-center gap-3 rounded-2xl bg-forest px-6 py-3.5 text-cream shadow-soft transition-transform hover:-translate-y-0.5"
+          class="inline-flex items-center gap-2.5 rounded-xl bg-forest px-4 py-2.5 text-cream shadow-soft transition-transform hover:-translate-y-0.5"
         >
           {s.icon === 'play' ? (
             <svg
-              width="24"
-              height="26"
+              width="20"
+              height="22"
               viewBox="0 0 40 44"
               aria-hidden="true"
               fill="none"
@@ -56,8 +56,8 @@ const stores = [
             </svg>
           ) : (
             <svg
-              width="24"
-              height="26"
+              width="20"
+              height="22"
               viewBox="0 0 384 512"
               aria-hidden="true"
               fill="currentColor"
@@ -67,8 +67,8 @@ const stores = [
             </svg>
           )}
           <span class="text-left leading-tight">
-            <span class="block text-xs uppercase tracking-wide text-mist/80">{s.label}</span>
-            <span class="block text-lg font-semibold">{s.name}</span>
+            <span class="block text-[0.62rem] uppercase tracking-wide text-mist/80">{s.label}</span>
+            <span class="block text-[0.95rem] font-semibold">{s.name}</span>
           </span>
         </a>
         <span class="text-xs font-medium text-soft">{s.note}</span>
