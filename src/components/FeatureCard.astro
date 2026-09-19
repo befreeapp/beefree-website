@@ -14,7 +14,7 @@ interface Props {
 const { icon, title, body, iconType = 'emoji', badge, index = 0 } = Astro.props;
 ---
 <div
-  class="reveal relative h-full rounded-3xl border border-hairline bg-white/70 p-6 shadow-card transition-shadow hover:shadow-soft"
+  class="reveal relative h-full rounded-3xl border border-hairline bg-white/70 p-5 shadow-card sm:p-6 transition-shadow hover:shadow-soft"
   style={`--reveal-delay:${index * 90}ms`}
 >
   {
