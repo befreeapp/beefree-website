@@ -6,7 +6,6 @@ import CtaButtons from '../components/CtaButtons.astro';
 import Sprout from '../components/Sprout.astro';
 import Curve from '../components/Curve.astro';
 import FilmPlayer from '../components/FilmPlayer.astro';
-import CampaignGallery from '../components/CampaignGallery.astro';
 import ScreenshotCarousel from '../components/ScreenshotCarousel.astro';
 import BefreePlusLockup from '../components/BefreePlusLockup.astro';
 import { PLUS_PRICES, PLUS_YEARLY_SAVING, PLUS_BENEFITS, FREE_FEATURES } from '../data/plus';
@@ -291,23 +290,6 @@ const appSchema = {
           <span class="text-xs text-soft">Optional. Cancel any time.</span>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ================= CAMPAIGN GALLERY ================= -->
-  <section class="container-prose py-12 sm:py-16">
-    <div class="max-w-xl">
-      <p class="eyebrow reveal">From the campaign</p>
-      <h2 class="reveal mt-3 text-4xl sm:text-5xl" style="--reveal-delay:60ms">
-        Month one<FullStop />
-      </h2>
-      <p class="reveal mt-4 text-soft" style="--reveal-delay:120ms">
-        The artwork behind BeFree’s first month — the same quiet idea, told a few
-        different ways. Tap any one to see it full size.
-      </p>
-    </div>
-    <div class="mt-9">
-      <CampaignGallery />
     </div>
   </section>
 
