@@ -15,20 +15,29 @@ const navLinks = [
     class="container-prose flex items-center justify-between py-4"
     aria-label="Primary"
   >
-    <a href="/" class="flex items-center gap-2" aria-label="Befree — home">
+    <a href="/" class="flex items-center gap-2.5" aria-label="Befree — home">
+      <!-- App-icon tile beside the wordmark, as the campaign locks it up. -->
+      <img
+        src="/assets/icon-tile.webp"
+        alt=""
+        width="128"
+        height="128"
+        class="h-8 w-8 rounded-[0.55rem] sm:h-9 sm:w-9 sm:rounded-[0.6rem]"
+        decoding="async"
+      />
       <img
         src="/assets/wordmark.png"
         alt="Befree"
         width="264"
         height="100"
-        class="h-10 w-auto"
+        class="h-8 w-auto sm:h-10"
         decoding="async"
       />
     </a>
-    <ul class="flex items-center gap-5 text-sm font-medium sm:gap-7 sm:text-base">
+    <ul class="flex items-center gap-4 text-sm font-medium sm:gap-7 sm:text-base">
       {
         navLinks.map((link) => (
-          <li>
+          <li class:list={[link.href === '/' && 'hidden sm:block']}>
             <a
               href={link.href}
               class:list={[

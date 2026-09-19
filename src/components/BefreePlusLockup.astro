@@ -5,17 +5,14 @@ interface Props {
   class?: string;
   // Tailwind height utility for the wordmark (e.g. 'h-8', 'h-10').
   size?: string;
+  // `cream` for forest backgrounds.
+  tone?: 'forest' | 'cream';
 }
-const { class: className = '', size = 'h-9' } = Astro.props;
+const { class: className = '', size = 'h-9', tone = 'forest' } = Astro.props;
+const src = tone === 'cream' ? '/assets/wordmark-cream.png' : '/assets/wordmark.png';
+const plusTone = tone === 'cream' ? 'text-amber' : 'text-teal';
 ---
 <span class={`inline-flex items-start gap-1.5 ${className}`}>
-  <img
-    src="/assets/wordmark.png"
-    alt="Befree"
-    width="264"
-    height="100"
-    class={`${size} w-auto`}
-    decoding="async"
-  />
-  <span class="mt-0.5 text-base font-semibold leading-none text-teal">Plus</span>
+  <img src={src} alt="Befree" width="264" height="100" class={`${size} w-auto`} decoding="async" />
+  <span class={`mt-0.5 text-base font-semibold leading-none ${plusTone}`}>Plus</span>
 </span>

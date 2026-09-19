@@ -1,0 +1,33 @@
+---
+// An app screen held in a simple dark phone body, as the campaign shows them.
+// The screen is never stretched or cropped: the frame takes the image's ratio.
+interface Props {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  loading?: 'lazy' | 'eager';
+  class?: string;
+}
+const { src, alt, width, height, loading = 'lazy', class: className = '' } = Astro.props;
+---
+<div class={`phone ${className}`}>
+  <img src={src} alt={alt} width={width} height={height} loading={loading} decoding="async" />
+</div>
+
+<style>
+  .phone {
+    padding: 0.55rem;
+    border-radius: 2.4rem;
+    background: #1d2b2b;
+    box-shadow:
+      0 30px 60px -24px rgba(15, 61, 57, 0.45),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+  .phone > img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 1.9rem;
+  }
+</style>

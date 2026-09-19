@@ -9,11 +9,28 @@ interface Props {
   label: string;
   /** Short line under the player. */
   caption?: string;
+  /** `large` for the hero, where the film is the composition's main object. */
+  size?: 'default' | 'large';
+  /** `onForest` when the player sits on a dark block. */
+  tone?: 'onCream' | 'onForest';
   class?: string;
 }
-const { src, poster, label, caption, class: className = '' } = Astro.props;
+const {
+  src,
+  poster,
+  label,
+  caption,
+  size = 'default',
+  tone = 'onCream',
+  class: className = '',
+} = Astro.props;
+const sizes = {
+  default: 'max-w-[16rem] sm:max-w-[17.5rem]',
+  large: 'max-w-[17rem] sm:max-w-[19rem] lg:max-w-[21rem]',
+};
+const captionTone = tone === 'onForest' ? 'text-mist/70' : 'text-soft';
 ---
-<figure class={`mx-auto w-full max-w-[16rem] sm:max-w-[17.5rem] ${className}`}>
+<figure class={`mx-auto w-full ${sizes[size]} ${className}`}>
   <div
     class="film relative overflow-hidden rounded-2xl border border-hairline bg-forest shadow-soft"
     data-film
@@ -33,7 +50,7 @@ const { src, poster, label, caption, class: className = '' } = Astro.props;
       <span class="film__playIcon" aria-hidden="true">▶</span>
     </button>
   </div>
-  <figcaption class="mt-3 text-center text-xs leading-relaxed text-soft">
+  <figcaption class={`mt-3 text-center text-xs leading-relaxed ${captionTone}`}>
     {caption && <span class="block">{caption}</span>}
     {/* Attribution required alongside any player using these campaign tracks. */}
     <span class="block">Music: Made with ElevenMusic.</span>

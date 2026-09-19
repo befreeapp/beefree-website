@@ -10,24 +10,20 @@ export const PLUS_PRICES = {
 export const PLUS_YEARLY_SAVING = '~21%';
 
 export interface PlusBenefit {
-  icon: string;
   title: string;
   body: string;
 }
 
 export const PLUS_BENEFITS: PlusBenefit[] = [
   {
-    icon: '💬',
     title: 'Unlimited AI chat',
     body: 'Full conversations with your companion, any time — no monthly limit.',
   },
   {
-    icon: '🛡️',
     title: 'App & content blocking',
     body: 'A full app blocker: lock the apps that pull you in and filter sites during your focus hours.',
   },
   {
-    icon: '💌',
     title: 'Check-ins from your partner',
     body: 'A warm message at the time of day you find hardest — tap it to talk.',
   },

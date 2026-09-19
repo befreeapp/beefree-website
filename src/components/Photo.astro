@@ -7,7 +7,7 @@ interface Props {
   width: number;
   height: number;
   /** Which of the campaign's curve shapes to cut the photo into. */
-  shape?: 'curve' | 'curveAlt' | 'wide';
+  shape?: 'curve' | 'curveAlt' | 'bleed';
   loading?: 'lazy' | 'eager';
   class?: string;
 }
@@ -24,7 +24,7 @@ const {
 const shapes = {
   curve: 'photo-curve',
   curveAlt: 'photo-curve--alt',
-  wide: 'photo-curve--wide',
+  bleed: 'photo-curve--bleed',
 };
 ---
 <div class={`photo ${shapes[shape]} ${className}`}>

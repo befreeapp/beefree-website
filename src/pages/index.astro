@@ -1,39 +1,33 @@
 ---
 import Base from '../layouts/Base.astro';
 import FullStop from '../components/FullStop.astro';
-import FeatureCard from '../components/FeatureCard.astro';
 import CtaButtons from '../components/CtaButtons.astro';
 import Sprout from '../components/Sprout.astro';
 import Curve from '../components/Curve.astro';
 import FilmPlayer from '../components/FilmPlayer.astro';
-import ScreenshotCarousel from '../components/ScreenshotCarousel.astro';
 import Photo from '../components/Photo.astro';
+import PhoneFrame from '../components/PhoneFrame.astro';
 import BefreePlusLockup from '../components/BefreePlusLockup.astro';
 import { PLUS_PRICES, PLUS_YEARLY_SAVING, PLUS_BENEFITS, FREE_FEATURES } from '../data/plus';
 import { PLAY_URL } from '../data/links';
 
 const features = [
   {
-    icon: '💬',
     title: 'Your AI accountability partner',
     body: 'A companion you name and talk to anytime — a gentle nudge when you go quiet, a kind word after a slip. Never a lecture.',
   },
   {
-    icon: '🛡️',
     title: 'Block what pulls you in',
-    body: 'A built-in app blocker for the apps that pull you in — block on a schedule or by place, plus an on-device adult-content filter and strict mode.',
+    body: 'An app blocker for the apps that pull you in — on a schedule or by place — plus an on-device adult-content filter.',
     badge: 'Plus',
   },
   {
-    icon: '🌱',
-    iconType: 'sprout',
     title: 'Small wins, every day',
     body: 'A simple daily check-in builds your streak. Honest check-ins are the whole practice — no judgement either way.',
   },
   {
-    icon: '💛',
     title: 'Help, one tap away',
-    body: 'Supportive links to counselling, articles, and crisis lines — always available and close by when you need them.',
+    body: 'Supportive links to counselling, articles, and crisis lines — always close by when you need them.',
   },
 ];
 
@@ -42,6 +36,15 @@ const values = [
   { title: 'Private by design', body: 'Your data stays on your device. Never sold.' },
   { title: 'A companion, not a warden', body: 'Support without shame, on your terms.' },
   { title: 'You stay in control', body: 'Every permission is optional and reversible.' },
+];
+
+// The Play Store screens, for the "closer look" strip and the lightbox.
+const shots = [
+  { src: '/assets/shot-01-check-in.webp', alt: 'The BeFree home screen, with the daily check-in and your streak.' },
+  { src: '/assets/shot-02-companion.webp', alt: 'A warm conversation with the AI companion, Atlas.' },
+  { src: '/assets/shot-03-blocking.webp', alt: 'App and content blocking — schedules, places and an adult-content filter.' },
+  { src: '/assets/shot-04-support.webp', alt: 'The support library: counselling directories, articles and crisis lines.' },
+  { src: '/assets/shot-05-plus.webp', alt: 'The optional BeFree Plus screen, with its features and pricing.' },
 ];
 
 const appSchema = {
@@ -65,36 +68,34 @@ const appSchema = {
   schema={appSchema}
 >
   <!-- ================= HERO ================= -->
+  <!-- Composed like the campaign cards: a big statement on the left, the film
+       as the main object on the right, a terracotta disc behind it that runs
+       off the edge, and the forest sweep rising through the bottom. -->
   <section class="paper relative overflow-hidden">
-    <div class="container-prose relative pb-8 pt-3 sm:pt-6 lg:pb-12 lg:pt-8">
+    <span
+      class="pointer-events-none absolute -right-20 top-[44%] h-[20rem] w-[20rem] rounded-full bg-terracotta sm:-right-24 sm:h-[28rem] sm:w-[28rem] lg:-right-36 lg:top-[14%] lg:h-[36rem] lg:w-[36rem]"
+      aria-hidden="true"></span>
+
+    <div class="container-prose relative z-10 pb-16 pt-4 sm:pb-20 sm:pt-8 lg:pb-16 lg:pt-14">
       <!-- Grid placement rather than DOM order, so the film sits between the
-           headline and the store buttons on mobile, but beside them on desktop —
-           without duplicating the buttons. -->
-      <!-- rows [auto,1fr] so the taller film column doesn't push the buttons
-           away from the copy — spare height goes below them instead. -->
+           headline and the store buttons on mobile, but beside them on desktop. -->
       <div
-        class="grid gap-y-7 lg:grid-cols-[1.05fr_0.95fr] lg:grid-rows-[auto_1fr] lg:items-start lg:gap-x-12"
+        class="grid gap-y-8 lg:grid-cols-[1.15fr_0.85fr] lg:grid-rows-[auto_1fr] lg:items-start lg:gap-x-8"
       >
-        <div class="reveal max-w-xl lg:col-start-1 lg:row-start-1" style="--reveal-delay:80ms">
-          <h1 class="text-[2.6rem] leading-[1.04] sm:text-5xl lg:text-6xl">
-            Take back your time<FullStop />
-          </h1>
-          <p class="mt-5 text-base leading-relaxed text-soft sm:mt-5 sm:text-lg">
+        <div class="reveal lg:col-start-1 lg:row-start-1" style="--reveal-delay:80ms">
+          <h1 class="display-xl max-w-[9ch]">Take back your time<FullStop /></h1>
+          <p class="lead mt-6 max-w-md text-ink/80">
             A kinder way to ease phone addiction — an AI accountability partner, an
-            app blocker, and support when you need it. Free, private, no ads.
+            app blocker, and support close by when you need it.
           </p>
         </div>
 
-        <!-- The explainer film, with a terracotta accent behind it -->
         <div
-          class="reveal relative lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-center"
+          class="reveal relative lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:justify-self-end"
           style="--reveal-delay:200ms"
         >
-          <span
-            class="pointer-events-none absolute -left-4 bottom-8 h-28 w-28 rounded-full bg-terracotta/90 sm:h-36 sm:w-36 lg:-left-8"
-            aria-hidden="true"></span>
           <FilmPlayer
-            class="relative"
+            size="large"
             src="/assets/film-overview.mp4"
             poster="/assets/film-overview-poster.webp"
             label="So, what does BeFree do? — a 33 second film"
@@ -102,137 +103,258 @@ const appSchema = {
           />
         </div>
 
-        <div
-          class="reveal lg:col-start-1 lg:row-start-2 lg:mt-8"
-          style="--reveal-delay:260ms"
-        >
+        <div class="reveal lg:col-start-1 lg:row-start-2 lg:mt-8" style="--reveal-delay:260ms">
           <CtaButtons />
         </div>
       </div>
     </div>
+
+    <Curve depth="hero" fill="#0F3D39" class="absolute inset-x-0 bottom-0 z-[1]" />
   </section>
 
-  <Curve fill="#0F3D39" />
+  <!-- ============ 01 · MAKE ROOM FOR REAL LIFE ============ -->
+  <!-- Copy on the left; the photograph takes the right half and runs off the
+       edge of the screen, inside one big curve, with a disc tucked behind it. -->
+  <section class="paper relative overflow-hidden bg-forest text-cream">
+    <div class="container-prose relative py-12 sm:py-16 lg:py-28">
+      <div class="lg:max-w-[44%]">
+        <p class="eyebrow eyebrow--onForest reveal">01 / A kinder way</p>
+        <h2 class="display-lg reveal mt-4 text-cream" style="--reveal-delay:60ms">
+          Make room for real life<FullStop />
+        </h2>
+        <p class="lead reveal mt-6 max-w-sm text-mist/85" style="--reveal-delay:120ms">
+          An unhurried cup of tea. A chapter of that book. You don’t have to give up
+          your phone to want a little more space from it.
+        </p>
+      </div>
+    </div>
 
-  <!-- ============ MAKE ROOM FOR REAL LIFE ============ -->
-  <section class="paper bg-forest text-cream">
-    <div class="container-prose py-8 sm:py-12">
-      <p class="eyebrow eyebrow--onForest reveal">A kinder way</p>
-      <h2 class="reveal mt-3 max-w-2xl text-[1.7rem] text-cream sm:text-[2.35rem]" style="--reveal-delay:60ms">
-        Make room for real life<FullStop />
-      </h2>
-      <p class="reveal mt-5 max-w-xl text-base leading-relaxed text-mist/80 sm:text-lg" style="--reveal-delay:120ms">
-        An unhurried cup of tea. A chapter of that book. A conversation without checking
-        your screen. You don’t have to give up your phone to want a little more space
-        from it.
-      </p>
+    <div
+      class="reveal relative ml-6 h-64 sm:ml-12 sm:h-80 lg:absolute lg:inset-y-0 lg:right-0 lg:ml-0 lg:h-auto lg:w-[47%]"
+      style="--reveal-delay:160ms"
+    >
+      <span
+        class="pointer-events-none absolute -left-10 bottom-10 h-36 w-36 rounded-full bg-terracotta lg:-left-16 lg:bottom-16 lg:h-52 lg:w-52"
+        aria-hidden="true"></span>
       <Photo
-        src="/assets/photo/be-here.webp"
-        alt="Two people sharing a pot of tea and biscuits at a sunlit garden table."
-        width={954}
-        height={380}
-        shape="wide"
-        class="reveal mt-7 h-44 w-full sm:mt-9 sm:h-auto"
+        src="/assets/photo/be-here-tall.webp"
+        alt="Two people sharing a pot of tea at a sunlit garden table."
+        width={694}
+        height={690}
+        shape="bleed"
+        class="relative z-[1] h-full w-full"
       />
     </div>
   </section>
 
-  <div class="bg-forest">
-    <Curve fill="#FBF6EC" flip />
-  </div>
-
   <!-- ================= WHAT IT IS ================= -->
-  <section class="container-prose py-8 sm:py-12">
+  <section class="container-prose py-12 sm:py-16 lg:py-20">
     <p class="eyebrow reveal">Inside BeFree</p>
-    <h2 class="reveal mt-3 text-[1.7rem] sm:text-[2.35rem]" style="--reveal-delay:60ms">
+    <h2 class="display-lg reveal mt-4" style="--reveal-delay:60ms">
       What it is<FullStop />
     </h2>
-    <p class="reveal mt-4 max-w-xl text-soft" style="--reveal-delay:120ms">
-      Gentle, practical help for phone addiction — four calm ways to spend less time
-      pulled into your screen. A little support as you work on your phone habits; no
-      promise of a perfect streak.
+    <p class="lead reveal mt-5 max-w-md text-ink/80" style="--reveal-delay:120ms">
+      Four calm ways to spend less time pulled into your screen — no promise of a
+      perfect streak.
     </p>
-    <div class="mt-7 grid sm:mt-9 grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    <!-- Editorial columns rather than boxed cards. -->
+    <ul class="mt-10 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 lg:mt-12 lg:grid-cols-4">
       {
         features.map((f, i) => (
-          <FeatureCard
-            icon={f.icon}
-            iconType={f.iconType}
-            title={f.title}
-            body={f.body}
-            badge={f.badge}
-            index={i}
-          />
+          <li class="reveal border-t border-forest/15 pt-5" style={`--reveal-delay:${i * 90}ms`}>
+            <div class="flex items-center justify-between">
+              <p class="eyebrow">0{i + 1}</p>
+              {f.badge && (
+                <span class="rounded-full bg-mist px-2.5 py-0.5 text-xs font-semibold text-teal">
+                  {f.badge}
+                </span>
+              )}
+            </div>
+            <h3 class="mt-4 text-xl leading-snug">{f.title}</h3>
+            <p class="mt-2 text-[0.95rem] leading-relaxed text-soft">{f.body}</p>
+          </li>
         ))
       }
+    </ul>
+  </section>
+
+  <!-- ============ 02 · MEET YOUR COMPANION ============ -->
+  <!-- The app screen as the object: phone on a disc that runs off the left
+       edge, copy on the right. -->
+  <section class="paper relative overflow-hidden bg-mist/60">
+    <span
+      class="pointer-events-none absolute -left-24 top-[30%] h-[18rem] w-[18rem] rounded-full bg-terracotta sm:h-[24rem] sm:w-[24rem] lg:-left-28 lg:top-[18%] lg:h-[30rem] lg:w-[30rem]"
+      aria-hidden="true"></span>
+    <div
+      class="container-prose relative py-12 sm:py-16 lg:grid lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-x-12 lg:py-24"
+    >
+      <div class="reveal relative mx-auto w-full max-w-[13.5rem] sm:max-w-[16.5rem] lg:mx-0 lg:justify-self-start">
+        <PhoneFrame
+          src="/assets/screen-companion.webp"
+          alt="A conversation with Atlas, the AI companion, in BeFree."
+          width={614}
+          height={1193}
+        />
+      </div>
+      <div class="reveal mt-10 lg:mt-0" style="--reveal-delay:120ms">
+        <p class="eyebrow">02 / AI companion</p>
+        <h2 class="display-lg mt-4 max-w-[11ch]">Meet your companion<FullStop /></h2>
+        <p class="lead mt-6 max-w-sm text-ink/80">
+          Name it. Talk things through. A gentle nudge when you go quiet, a kind word
+          after a slip — never a lecture.
+        </p>
+        <p class="mt-5 text-sm text-soft">AI support — not therapy or a crisis service.</p>
+      </div>
     </div>
   </section>
 
-  <div class="reveal">
-    <ScreenshotCarousel />
-  </div>
-
-  <Curve fill="#0F3D39" />
-
-  <!-- ============ ONE SLIP ISN'T THE WHOLE STORY ============ -->
+  <!-- ============ 03 · MAKE SPACE, ON YOUR TERMS ============ -->
   <section class="paper relative overflow-hidden bg-forest text-cream">
-    <!-- Clipped by one edge only, so it reads as a deliberate arc rather than a
-         sliced circle; the content keeps a clear lane beside it. -->
     <span
-      class="pointer-events-none absolute -right-16 top-1/2 hidden h-64 w-64 -translate-y-1/2 rounded-full bg-terracotta/90 lg:block"
+      class="pointer-events-none absolute -right-24 top-[36%] h-[18rem] w-[18rem] rounded-full bg-terracotta sm:h-[24rem] sm:w-[24rem] lg:-right-32 lg:top-[14%] lg:h-[32rem] lg:w-[32rem]"
       aria-hidden="true"></span>
-    <div class="container-prose relative py-8 sm:py-12 lg:pr-40">
-      <div class="max-w-2xl">
-        <p class="eyebrow eyebrow--onForest reveal">A kinder perspective</p>
-        <h2 class="reveal mt-3 text-[1.7rem] leading-[1.06] text-cream sm:text-[2.35rem]" style="--reveal-delay:60ms">
-          One slip isn’t the whole story<FullStop />
-        </h2>
-        <p class="reveal mt-5 text-base leading-relaxed text-mist/85 sm:text-lg" style="--reveal-delay:120ms">
-          Pause. Take a breath. Begin again when you’re ready. A streak is a record —
-          not a verdict.
+    <div
+      class="container-prose relative py-12 sm:py-16 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-x-12 lg:py-24"
+    >
+      <div class="reveal">
+        <p class="eyebrow eyebrow--onForest">03 / App blocking · Plus</p>
+        <h2 class="display-lg mt-4 max-w-[11ch] text-cream">Make space. On your terms<FullStop /></h2>
+        <p class="lead mt-6 max-w-sm text-mist/85">
+          Block the apps that pull you in — on a schedule, or only in certain places —
+          and filter adult content on your device. Every permission is yours to grant, and
+          to take back.
         </p>
+        <a
+          href="/plus"
+          class="mt-7 inline-flex items-center gap-2 rounded-full bg-cream px-5 py-2.5 text-[0.95rem] font-semibold text-forest transition-transform hover:-translate-y-0.5"
+        >
+          What’s in Plus
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+      <div
+        class="reveal relative mx-auto mt-10 w-full max-w-[13.5rem] sm:max-w-[16.5rem] lg:mx-0 lg:mt-0 lg:justify-self-end"
+        style="--reveal-delay:120ms"
+      >
+        <PhoneFrame
+          src="/assets/screen-blocking.webp"
+          alt="The app blocking screen in BeFree: setup, places, rules and the adult-content filter."
+          width={614}
+          height={1193}
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- A closer look: every store screen, tap to expand -->
+  <section class="container-prose py-10 sm:py-12" aria-label="A closer look inside BeFree">
+    <div class="reveal flex items-baseline justify-between gap-4">
+      <p class="eyebrow">A closer look</p>
+      <p class="text-xs text-soft">Tap a screen to expand it</p>
+    </div>
+    <!-- A swipeable strip on phones, a five-up row from tablet. -->
+    <ul
+      class="shots reveal -mx-5 mt-5 flex gap-3 overflow-x-auto px-5 sm:mx-0 sm:grid sm:grid-cols-5 sm:gap-4 sm:overflow-visible sm:px-0"
+      style="--reveal-delay:80ms"
+    >
+      {
+        shots.map((s, i) => (
+          <li class="w-[40%] flex-none snap-center sm:w-auto">
+            <button
+              type="button"
+              class="block w-full cursor-zoom-in overflow-hidden rounded-xl transition-transform hover:-translate-y-1 focus-visible:-translate-y-1 sm:rounded-2xl"
+              data-shot
+              data-gallery="app"
+              data-index={i}
+              data-src={s.src}
+              data-alt={s.alt}
+              aria-label={`Expand: ${s.alt}`}
+            >
+              <img
+                src={s.src}
+                alt=""
+                width="880"
+                height="1564"
+                loading="lazy"
+                decoding="async"
+                class="h-auto w-full"
+              />
+            </button>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+  <style>
+    @media (max-width: 639px) {
+      .shots {
+        scroll-snap-type: x proximity;
+        scrollbar-width: none;
+      }
+      .shots::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  </style>
+
+  <!-- ============ 04 · ONE SLIP ISN'T THE WHOLE STORY ============ -->
+  <!-- The campaign's speech-bubble card: the statement inside a big cream
+       bubble on forest, a disc behind its lower-right corner. -->
+  <section class="paper relative overflow-hidden bg-forest text-cream">
+    <div class="container-prose relative py-12 sm:py-16 lg:py-24">
+      <div class="relative">
+        <span
+          class="pointer-events-none absolute -bottom-12 -right-20 h-48 w-48 rounded-full bg-terracotta lg:-bottom-6 lg:left-[34rem] lg:right-auto lg:h-[22rem] lg:w-[22rem]"
+          aria-hidden="true"></span>
+        <div class="bubble bubble--xl reveal relative max-w-3xl" style="--reveal-delay:60ms">
+          <p class="eyebrow">04 / A kinder perspective</p>
+          <h2 class="display-lg mt-4 max-w-[12ch]">One slip isn’t the whole story<FullStop /></h2>
+          <p class="lead mt-5 max-w-sm text-ink/80">
+            Pause. Take a breath. Begin again when you’re ready. A streak is a record —
+            not a verdict.
+          </p>
+        </div>
       </div>
 
-      <div
-        class="reveal mt-9 grid sm:mt-12 grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 lg:grid-cols-4"
+      <ul
+        class="reveal mt-14 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4"
         style="--reveal-delay:160ms"
       >
         {
           values.map((v) => (
-            <div class="border-l-2 border-terracotta pl-4">
-              <h3 class="text-cream">{v.title}</h3>
-              <p class="mt-1 text-sm leading-relaxed text-mist/80">{v.body}</p>
-            </div>
+            <li>
+              <h3 class="text-lg text-cream">
+                {v.title}<FullStop />
+              </h3>
+              <p class="mt-1 text-sm leading-relaxed text-mist/75">{v.body}</p>
+            </li>
           ))
         }
-      </div>
+      </ul>
     </div>
   </section>
 
-  <div class="bg-forest">
-    <Curve fill="#FBF6EC" flip />
-  </div>
-
   <!-- ================= FREE & PLUS ================= -->
-  <section class="container-prose py-8 sm:py-12">
+  <!-- Two flat colour blocks, no outlines. -->
+  <section class="container-prose py-12 sm:py-16 lg:py-20">
     <p class="eyebrow reveal">Free &amp; Plus</p>
-    <h2 class="reveal mt-3 text-[1.7rem] sm:text-[2.35rem]" style="--reveal-delay:60ms">
+    <h2 class="display-lg reveal mt-4" style="--reveal-delay:60ms">
       Pick what supports you<FullStop />
     </h2>
 
-    <div class="mt-7 grid sm:mt-9 gap-6 lg:grid-cols-[1fr_1fr] lg:items-start">
+    <div class="mt-9 grid gap-5 lg:mt-12 lg:grid-cols-2">
       <!-- Free -->
-      <div class="reveal rounded-2xl border border-hairline bg-white/70 p-6 shadow-card sm:p-7">
-        <div class="flex items-center gap-2">
-          <Sprout class="h-7 w-auto text-teal" />
-          <h3 class="text-2xl">Start free<FullStop /></h3>
+      <div class="reveal rounded-[2rem] bg-mist/70 p-7 sm:p-9">
+        <div class="flex items-center gap-3">
+          <Sprout class="h-8 w-auto text-teal" />
+          <h3 class="text-2xl sm:text-3xl">Start free<FullStop /></h3>
         </div>
-        <p class="mt-2 text-sm text-soft">The core app, with no paywall and no ads.</p>
-        <ul class="mt-5 space-y-3">
+        <p class="mt-3 text-soft">The core app, with no paywall and no ads.</p>
+        <ul class="mt-6 space-y-3">
           {
             FREE_FEATURES.map((f) => (
-              <li class="flex items-start gap-2 text-[0.95rem] text-ink/90">
-                <span class="mt-0.5 text-teal" aria-hidden="true">✓</span>
+              <li class="flex items-start gap-3 text-[0.95rem] text-ink/90">
+                <span class="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-terracotta" aria-hidden="true" />
                 <span>{f}</span>
               </li>
             ))
@@ -241,77 +363,78 @@ const appSchema = {
       </div>
 
       <!-- Plus -->
-      <div
-        class="reveal rounded-2xl border-2 border-teal bg-mist/40 p-6 shadow-soft sm:p-7"
-        style="--reveal-delay:120ms"
-      >
-        <BefreePlusLockup size="h-8" />
-        <h3 class="mt-4 text-2xl">Go further, if you want<FullStop /></h3>
-        <p class="mt-2 text-sm text-soft">
+      <div class="reveal paper rounded-[2rem] bg-forest p-7 text-cream sm:p-9" style="--reveal-delay:120ms">
+        <BefreePlusLockup size="h-8" tone="cream" />
+        <h3 class="mt-5 text-2xl text-cream sm:text-3xl">Go further, if you want<FullStop /></h3>
+        <p class="mt-3 text-mist/80">
           Everything in free, plus — from
-          <span class="font-semibold text-forest">{PLUS_PRICES.monthly}/month</span>
+          <span class="font-semibold text-cream">{PLUS_PRICES.monthly}/month</span>
           (or {PLUS_PRICES.yearly}/year, saving {PLUS_YEARLY_SAVING}).
         </p>
-        <ul class="mt-5 space-y-4">
+        <ul class="mt-6 space-y-5">
           {
-            PLUS_BENEFITS.map((b) => (
-              <li class="flex items-start gap-3">
-                <span class="text-2xl" aria-hidden="true">{b.icon}</span>
-                <span>
-                  <span class="block font-semibold text-forest">{b.title}</span>
-                  <span class="mt-0.5 block text-sm leading-relaxed text-soft">{b.body}</span>
-                </span>
+            PLUS_BENEFITS.map((b, i) => (
+              <li>
+                <p class="eyebrow eyebrow--onForest">0{i + 1}</p>
+                <p class="mt-1 font-semibold text-cream">{b.title}</p>
+                <p class="mt-0.5 text-sm leading-relaxed text-mist/75">{b.body}</p>
               </li>
             ))
           }
         </ul>
-        <div class="mt-6 flex flex-wrap items-center gap-3">
+        <div class="mt-7 flex flex-wrap items-center gap-4">
           <a
             href="/plus"
-            class="inline-flex items-center gap-2 rounded-2xl bg-forest px-5 py-3 font-semibold text-cream shadow-soft transition-transform hover:-translate-y-0.5"
+            class="inline-flex items-center gap-2 rounded-full bg-cream px-5 py-2.5 text-[0.95rem] font-semibold text-forest transition-transform hover:-translate-y-0.5"
           >
             See what’s in Plus
             <span aria-hidden="true">→</span>
           </a>
-          <span class="text-xs text-soft">Optional. Cancel any time.</span>
+          <span class="text-xs text-mist/70">Optional. Cancel any time.</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ================= CLOSING ================= -->
+  <!-- The "Your next chapter" card: copy left, the bench photograph running
+       off the right edge. -->
   <section class="paper relative overflow-hidden">
-    <div class="container-prose py-9 sm:py-14">
-      <div class="lg:grid lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-14">
-        <div class="reveal order-2 lg:order-1">
-          <Sprout class="mb-4 h-11 w-auto text-forest" />
-          <h2 class="text-[1.7rem] leading-[1.06] sm:text-[2.35rem]">Your next chapter<FullStop /></h2>
-          <p class="mt-5 max-w-md text-base leading-relaxed text-soft sm:text-lg">
-            A little less scrolling. A little more of what you love. Start with one
-            honest check-in — today.
-          </p>
-          <div class="mt-8">
-            <CtaButtons />
-          </div>
-          <p class="mt-10 max-w-lg text-xs leading-relaxed text-soft">
-            BeFree is a support tool, not medical treatment. If you’re struggling, please
-            reach out to a professional or a
-            <a href="/support#crisis" class="underline underline-offset-2 hover:text-forest"
-              >crisis line</a
-            >.
-          </p>
+    <div class="container-prose relative py-12 sm:py-16 lg:py-28">
+      <div class="reveal lg:max-w-[46%]">
+        <Sprout class="mb-5 h-11 w-auto text-forest" />
+        <h2 class="display-lg">Your next chapter<FullStop /></h2>
+        <p class="lead mt-6 max-w-sm text-ink/80">
+          A little less scrolling. A little more of what you love. Start with one honest
+          check-in — today.
+        </p>
+        <div class="mt-8">
+          <CtaButtons />
         </div>
-        <div class="reveal order-1 mb-9 lg:order-2 lg:mb-0" style="--reveal-delay:120ms">
-          <Photo
-            src="/assets/photo/next-chapter.webp"
-            alt="An open book resting on a sunlit park bench, surrounded by green leaves."
-            width={394}
-            height={660}
-            shape="curveAlt"
-            class="mx-auto h-52 w-full max-w-[20rem] sm:h-auto lg:max-w-none"
-          />
-        </div>
+        <p class="mt-10 max-w-md text-xs leading-relaxed text-soft">
+          BeFree is a support tool, not medical treatment. If you’re struggling, please
+          reach out to a professional or a
+          <a href="/support#crisis" class="underline underline-offset-2 hover:text-forest"
+            >crisis line</a
+          >.
+        </p>
       </div>
+    </div>
+    <div
+      class="reveal relative ml-6 h-64 sm:ml-12 sm:h-80 lg:absolute lg:inset-y-0 lg:right-0 lg:ml-0 lg:h-auto lg:w-[46%]"
+      style="--reveal-delay:120ms"
+    >
+      <span
+        class="pointer-events-none absolute -left-10 bottom-10 h-36 w-36 rounded-full bg-terracotta lg:-left-16 lg:bottom-20 lg:h-56 lg:w-56"
+        aria-hidden="true"></span>
+      <Photo
+        src="/assets/photo/next-chapter.webp"
+        alt="An open book resting on a sunlit park bench, surrounded by green leaves."
+        width={394}
+        height={660}
+        shape="bleed"
+        class="relative z-[1] h-full w-full"
+      />
     </div>
   </section>
 </Base>

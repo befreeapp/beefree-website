@@ -74,6 +74,23 @@
 
   /* ---- Campaign design language -------------------------------------- */
 
+  /* Statement headings at campaign scale: big, tight leading, slightly tucked
+     tracking. Fluid, so they fill a phone as confidently as a desktop. */
+  .display-xl {
+    font-size: clamp(2.9rem, 7vw, 5.6rem);
+    line-height: 0.96;
+    letter-spacing: -0.025em;
+  }
+  .display-lg {
+    font-size: clamp(2.25rem, 4.8vw, 3.9rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  /* The one short line that sits under a statement heading. */
+  .lead {
+    @apply text-[1.0625rem] leading-relaxed sm:text-[1.15rem];
+  }
+
   /* Letterspaced label above a statement heading, e.g. "01 / DAILY CHECK-IN". */
   .eyebrow {
     @apply text-xs font-semibold uppercase tracking-[0.18em] text-teal sm:text-sm;
@@ -97,8 +114,16 @@
     border-right: 1.1rem solid transparent;
     border-top: 1.1rem solid #fbf6ec;
   }
-  .bubble--onMist::after {
-    border-top-color: #fbf6ec;
+  /* The statement-sized bubble, as on the "One slip" card. */
+  .bubble--xl {
+    @apply rounded-[2rem] p-7 sm:rounded-[2.5rem] sm:p-12 lg:p-14;
+  }
+  .bubble--xl::after {
+    left: 3.5rem;
+    bottom: -1.4rem;
+    border-left-width: 1.5rem;
+    border-right-width: 1.5rem;
+    border-top-width: 1.5rem;
   }
 
   /* Photography held inside a big organic curve — the campaign's signature
@@ -110,9 +135,16 @@
   .photo-curve--alt {
     border-radius: 1.5rem 8rem 1.5rem 8rem;
   }
-  .photo-curve--wide {
-    @apply overflow-hidden shadow-soft;
-    border-radius: 7rem 7rem 1.5rem 1.5rem;
+  /* A photo that runs off the right edge of the viewport: one big curve on
+     the side that meets the copy, square where it leaves the screen. */
+  .photo-curve--bleed {
+    @apply overflow-hidden;
+    border-radius: 6rem 0 0 0;
+  }
+  @media (min-width: 1024px) {
+    .photo-curve--bleed {
+      border-radius: 14rem 0 0 5rem;
+    }
   }
 
   /* Photography graded to sit in the same world as the social posts: a warm

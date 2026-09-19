@@ -6,8 +6,9 @@ interface Props {
   fill?: string;
   /** Mirror horizontally, so consecutive curves don't all lean the same way. */
   flip?: boolean;
-  /** Shallow for tight joins, deep for a big editorial sweep. */
-  depth?: 'shallow' | 'deep';
+  /** Shallow for tight joins, deep for an editorial sweep, hero for the
+   *  full-height sweep that rises through a composition. */
+  depth?: 'shallow' | 'deep' | 'hero';
   class?: string;
 }
 const {
@@ -19,12 +20,20 @@ const {
 
 const paths = {
   deep: 'M0,140 L0,52 C 300,-32 760,118 1080,44 C 1240,7 1360,18 1440,34 L1440,140 Z',
+  // Rises from the bottom-left and stays low on the right, so it climbs under
+  // the copy and leaves the object on the right standing clear.
+  hero: 'M0,140 L0,36 C 280,-24 620,144 980,122 C 1180,110 1330,112 1440,116 L1440,140 Z',
   shallow: 'M0,70 L0,34 C 340,-14 820,70 1180,26 C 1300,11 1380,14 1440,20 L1440,70 Z',
 };
-const viewBox = depth === 'deep' ? '0 0 1440 140' : '0 0 1440 70';
+const heights = {
+  deep: 'h-[44px] sm:h-[72px]',
+  hero: 'h-[64px] sm:h-[110px] lg:h-[150px]',
+  shallow: 'h-[30px] sm:h-[44px]',
+};
+const viewBox = depth === 'shallow' ? '0 0 1440 70' : '0 0 1440 140';
 ---
 <svg
-  class={`-mb-px block w-full ${depth === 'deep' ? 'h-[44px] sm:h-[72px]' : 'h-[30px] sm:h-[44px]'} ${className}`}
+  class={`-mb-px block w-full ${heights[depth]} ${className}`}
   viewBox={viewBox}
   preserveAspectRatio="none"
   aria-hidden="true"

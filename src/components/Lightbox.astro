@@ -115,8 +115,6 @@
 <script>
   const lightbox = document.querySelector('[data-lightbox]') as HTMLElement | null;
   const lightboxImg = document.querySelector('[data-lightbox-img]') as HTMLImageElement | null;
-  const track = document.querySelector('[data-marquee-track]') as HTMLElement | null;
-
   let items: { src: string; alt: string }[] = [];
   let current = 0;
   let openedByKeyboard = false;
@@ -149,7 +147,6 @@
     render();
     lightbox.hidden = false;
     document.body.style.overflow = 'hidden';
-    track?.setAttribute('data-paused', '');
     (lightbox.querySelector('.lightbox__close') as HTMLElement | null)?.focus();
   }
 
@@ -158,9 +155,8 @@
     lightbox.hidden = true;
     lightboxImg.src = '';
     document.body.style.overflow = '';
-    track?.removeAttribute('data-paused');
-    // Returning focus into the carousel would keep it paused (:focus-within),
-    // so only restore focus for keyboard users.
+    // Only keyboard users get their focus put back; a pointer user shouldn't
+    // be left with a highlighted thumbnail.
     if (openedByKeyboard) lastFocused?.focus();
     else (document.activeElement as HTMLElement | null)?.blur();
   }
