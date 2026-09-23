@@ -13,6 +13,7 @@ import {
   PLUS_BENEFITS,
   FREE_FEATURES,
 } from '../data/plus';
+import { PLATFORM_FEATURES, IOS_LIVE } from '../data/platforms';
 
 const monthly = PLUS_PRICES.monthly.replace('£', '');
 const yearly = PLUS_PRICES.yearly.replace('£', '');
@@ -137,6 +138,68 @@ const plusSchema = {
         </ul>
       </div>
     </div>
+  </section>
+
+  <!-- Android & iPhone — what works where. Driven by data/platforms.ts. -->
+  <section id="platforms" class="container-prose scroll-mt-24 py-10 sm:py-14">
+    <p class="eyebrow reveal">Android &amp; iPhone</p>
+    <h2 class="display-lg reveal mt-4" style="--reveal-delay:60ms">What works where<FullStop /></h2>
+    <p class="lead reveal mt-5 max-w-lg text-ink/80" style="--reveal-delay:120ms">
+      {IOS_LIVE ? 'BeFree is on Android and iPhone.' : 'BeFree is on Android now, with iPhone on the way.'}
+      Some tools rely on device features only Android offers, so here’s the honest picture.
+    </p>
+    <div class="reveal mt-8 overflow-x-auto" style="--reveal-delay:160ms">
+      <table class="w-full min-w-[34rem] border-collapse text-left text-[0.95rem]">
+        <thead>
+          <tr class="border-b border-forest/20 text-xs font-semibold uppercase tracking-[0.14em] text-soft">
+            <th scope="col" class="py-3 pr-4 font-semibold">Feature</th>
+            <th scope="col" class="w-28 py-3 pr-4 font-semibold">Android</th>
+            <th scope="col" class="w-64 py-3 font-semibold">
+              iPhone{!IOS_LIVE && <span class="ml-1.5 normal-case tracking-normal text-soft/80">(coming soon)</span>}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            PLATFORM_FEATURES.map((f) => (
+              <tr class="border-b border-hairline align-top">
+                <td class="py-3.5 pr-4">
+                  <span class="text-ink/90">{f.name}</span>
+                  <span class="ml-2 rounded-full bg-mist px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-teal">
+                    {f.tier}
+                  </span>
+                </td>
+                {[f.android, f.ios].map((a) => (
+                  <td class="py-3.5 pr-4">
+                    {a.state === 'yes' && (
+                      <span class="font-semibold text-teal">
+                        <span aria-hidden="true">✓</span> Yes
+                      </span>
+                    )}
+                    {a.state === 'coming' && (
+                      <>
+                        <span class="rounded-full bg-amber/90 px-2 py-0.5 text-xs font-semibold text-forest">Coming</span>
+                        <span class="mt-1 block text-xs leading-relaxed text-soft">{a.note}</span>
+                      </>
+                    )}
+                    {a.state === 'no' && (
+                      <>
+                        <span class="font-semibold text-soft">Not available</span>
+                        <span class="mt-1 block text-xs leading-relaxed text-soft">{a.note}</span>
+                      </>
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+    <p class="reveal mt-4 text-xs text-soft">
+      We’ll only ever sell Plus features that work on your phone — the app shows the
+      right set for your device.
+    </p>
   </section>
 
   <!-- Pricing -->
