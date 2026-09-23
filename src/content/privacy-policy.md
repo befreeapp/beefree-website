@@ -1,6 +1,6 @@
 # BeFree — Privacy Policy
 
-**Effective date: 10 July 2026**  ·  **Last updated: 10 July 2026**
+**Effective date: 10 July 2026**  ·  **Last updated: 23 September 2026**
 
 BeFree ("BeFree", "we", "us") helps people reduce compulsive phone use with a
 supportive AI companion, optional on-device app/content blocking, and a library of
@@ -56,17 +56,29 @@ This policy explains what we handle and why.
 ## What we do NOT do
 - We do **not** sell your data.
 - We do **not** use your data for advertising.
-- We do **not** access your screen content. The optional accessibility-based blocker
-  only detects **which app is in the foreground** so it can show a calm "blocked"
-  screen — it does not read, log, or transmit screen contents.
+- We do **not** collect or transmit your screen content. The optional accessibility-based
+  app blocker only detects **which app is in the foreground** so it can show a calm
+  "blocked" screen — it does not read screen contents. The optional **short-form
+  blocker** (BeFree Plus) is a **separate** accessibility service, scoped to YouTube and
+  Instagram only, that recognises the Shorts/Reels feed from the **layout identifiers**
+  of on-screen elements — not the videos, captions, or text you see. It runs entirely
+  on your device and does **not log, store, or transmit** anything it sees.
+- We do **not** send your app-usage (screen time) data anywhere. The optional screen-time
+  view reads today's usage from your device and shows it to you; it stays on the device.
 - We do **not** track your location on our servers. Location is used **on-device
   only**, for the place-based rules you create.
 
 ## Permissions (Android)
 Each is optional and used only for the stated feature; you can revoke any of them in
 your device settings:
-- **Accessibility** — detect the foreground app to show your chosen block screen
-  (no screen-content reading).
+- **Accessibility (app blocking)** — detect the foreground app to show your chosen
+  block screen (no screen-content reading).
+- **Accessibility (short-form blocker, BeFree Plus)** — a second, separately enabled
+  service limited to YouTube and Instagram; recognises the Shorts/Reels feed from
+  on-screen layout identifiers so it can step you out of it. On-device only; nothing
+  logged or sent.
+- **Usage access (screen time)** — only if you open the screen-time view; reads today's
+  per-app usage from Android and shows it to you. Stays on your device.
 - **Display over other apps** — draw the calm block screen.
 - **Query installed apps** — let you choose which apps to block.
 - **Location (incl. background)** — only if you create place-based rules; coordinates

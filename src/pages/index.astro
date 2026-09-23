@@ -8,7 +8,13 @@ import FilmPlayer from '../components/FilmPlayer.astro';
 import Photo from '../components/Photo.astro';
 import PhoneFrame from '../components/PhoneFrame.astro';
 import BefreePlusLockup from '../components/BefreePlusLockup.astro';
-import { PLUS_PRICES, PLUS_YEARLY_SAVING, PLUS_BENEFITS, FREE_FEATURES } from '../data/plus';
+import {
+  PLUS_PRICES,
+  PLUS_YEARLY_SAVING,
+  PLUS_TRIAL_DAYS,
+  PLUS_BENEFITS,
+  FREE_FEATURES,
+} from '../data/plus';
 import { PLAY_URL } from '../data/links';
 
 const features = [
@@ -18,12 +24,12 @@ const features = [
   },
   {
     title: 'Block what pulls you in',
-    body: 'An app blocker for the apps that pull you in — on a schedule or by place — plus an on-device adult-content filter.',
+    body: 'An app blocker for the apps that pull you in — on a schedule or by place — plus a Shorts & Reels blocker and an on-device adult-content filter.',
     badge: 'Plus',
   },
   {
     title: 'Small wins, every day',
-    body: 'A simple daily check-in builds your streak. Honest check-ins are the whole practice — no judgement either way.',
+    body: 'A simple daily check-in builds your streak, and you can see your screen time app by app. Honest check-ins are the whole practice — no judgement either way.',
   },
   {
     title: 'Help, one tap away',
@@ -54,7 +60,7 @@ const appSchema = {
   applicationCategory: 'HealthApplication',
   url: Astro.site!.href,
   description:
-    'Befree is a free app for phone addiction — an AI accountability partner, an app blocker and content filter, and daily check-ins to help you spend less time on your phone.',
+    'Befree is a free app for phone addiction — an AI accountability partner, an app blocker, a YouTube Shorts and Instagram Reels blocker, a content filter, screen-time insights and daily check-ins to help you spend less time on your phone.',
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
   downloadUrl: PLAY_URL,
   installUrl: PLAY_URL,
@@ -64,7 +70,7 @@ const appSchema = {
 
 <Base
   title="Befree — ease phone addiction: AI partner & app blocker"
-  description="Ease phone addiction the kind way — an AI accountability partner, an app blocker, and daily check-ins. Free, private, no ads."
+  description="Ease phone addiction the kind way — an AI accountability partner, an app & Shorts blocker, and daily check-ins. Free, private, no ads."
   schema={appSchema}
 >
   <!-- ================= HERO ================= -->
@@ -218,9 +224,9 @@ const appSchema = {
         <p class="eyebrow eyebrow--onForest">03 / App blocking · Plus</p>
         <h2 class="display-lg mt-4 max-w-[11ch] text-cream">Make space. On your terms<FullStop /></h2>
         <p class="lead mt-6 max-w-sm text-mist/85">
-          Block the apps that pull you in — on a schedule, or only in certain places —
-          and filter adult content on your device. Every permission is yours to grant, and
-          to take back.
+          Block the apps that pull you in — on a schedule, or only in certain places.
+          Step gently out of YouTube Shorts and Instagram Reels. Filter adult content on
+          your device. Every permission is yours to grant, and to take back.
         </p>
         <a
           href="/plus"
@@ -368,9 +374,9 @@ const appSchema = {
         <BefreePlusLockup size="h-8" tone="cream" />
         <h3 class="mt-5 text-2xl text-cream sm:text-3xl">Go further, if you want<FullStop /></h3>
         <p class="mt-3 text-mist/80">
-          Everything in free, plus — from
-          <span class="font-semibold text-cream">{PLUS_PRICES.monthly}/month</span>
-          (or {PLUS_PRICES.yearly}/year, saving {PLUS_YEARLY_SAVING}).
+          Everything in free, plus — <span class="font-semibold text-cream">free for {PLUS_TRIAL_DAYS} days</span>,
+          then from {PLUS_PRICES.monthly}/month (or {PLUS_PRICES.yearly}/year, saving
+          {PLUS_YEARLY_SAVING}).
         </p>
         <ul class="mt-6 space-y-5">
           {
@@ -391,7 +397,7 @@ const appSchema = {
             See what’s in Plus
             <span aria-hidden="true">→</span>
           </a>
-          <span class="text-xs text-mist/70">Optional. Cancel any time.</span>
+          <span class="text-xs text-mist/70">Optional. Cancel any time, including during the trial.</span>
         </div>
       </div>
     </div>

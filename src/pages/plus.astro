@@ -6,7 +6,13 @@ import Sprout from '../components/Sprout.astro';
 import BefreePlusLockup from '../components/BefreePlusLockup.astro';
 import FilmPlayer from '../components/FilmPlayer.astro';
 import Curve from '../components/Curve.astro';
-import { PLUS_PRICES, PLUS_YEARLY_SAVING, PLUS_BENEFITS, FREE_FEATURES } from '../data/plus';
+import {
+  PLUS_PRICES,
+  PLUS_YEARLY_SAVING,
+  PLUS_TRIAL_DAYS,
+  PLUS_BENEFITS,
+  FREE_FEATURES,
+} from '../data/plus';
 
 const monthly = PLUS_PRICES.monthly.replace('£', '');
 const yearly = PLUS_PRICES.yearly.replace('£', '');
@@ -17,18 +23,30 @@ const plusSchema = {
   applicationCategory: 'HealthApplication',
   url: new URL('/plus', Astro.site!).href,
   description:
-    'Befree Plus adds a full app blocker and content filter, unlimited AI chat, and partner check-ins to the free Befree app.',
+    'Befree Plus adds a full app blocker and content filter, a YouTube Shorts and Instagram Reels blocker, unlimited AI chat, and partner check-ins to the free Befree app. 14-day free trial.',
   publisher: { '@id': new URL('/#org', Astro.site!).href },
   offers: [
-    { '@type': 'Offer', name: 'Monthly', price: monthly, priceCurrency: 'GBP' },
-    { '@type': 'Offer', name: 'Yearly', price: yearly, priceCurrency: 'GBP' },
+    {
+      '@type': 'Offer',
+      name: 'Monthly',
+      price: monthly,
+      priceCurrency: 'GBP',
+      description: `${PLUS_TRIAL_DAYS}-day free trial for new subscribers`,
+    },
+    {
+      '@type': 'Offer',
+      name: 'Yearly',
+      price: yearly,
+      priceCurrency: 'GBP',
+      description: `${PLUS_TRIAL_DAYS}-day free trial for new subscribers`,
+    },
   ],
 };
 ---
 
 <Base
-  title="Befree Plus — app blocker, content filter & AI chat"
-  description="Befree Plus adds a full app blocker and content filter, unlimited AI chat, and partner check-ins — from £3.99/month."
+  title="Befree Plus — app, Shorts & Reels blocker, AI chat"
+  description="Befree Plus adds a full app blocker, a YouTube Shorts & Instagram Reels blocker, unlimited AI chat and partner check-ins. 14 days free, then from £3.99/month."
   schema={plusSchema}
 >
   <!-- Hero — the campaign's "Go further, if you want" card: forest, the
@@ -50,8 +68,9 @@ const plusSchema = {
         </h1>
         <p class="lead reveal mt-6 max-w-md text-mist/85" style="--reveal-delay:180ms">
           BeFree is free — and stays free. When you’re ready for deeper support, Plus
-          unlocks a few extra tools, from
-          <span class="font-semibold text-cream">{PLUS_PRICES.monthly}/month</span>.
+          unlocks a few extra tools —
+          <span class="font-semibold text-cream">free for {PLUS_TRIAL_DAYS} days</span>, then
+          from {PLUS_PRICES.monthly}/month.
         </p>
         <div class="bubble reveal mt-9 max-w-md" style="--reveal-delay:240ms">
           <ul class="space-y-1.5 text-lg text-forest">
@@ -101,7 +120,7 @@ const plusSchema = {
         <div class="flex items-center justify-between gap-4">
           <h2 class="text-2xl text-cream sm:text-3xl">With Plus<FullStop /></h2>
           <span class="rounded-full bg-amber px-3 py-1 text-xs font-semibold text-forest">
-            from {PLUS_PRICES.monthly}/mo
+            {PLUS_TRIAL_DAYS} days free
           </span>
         </div>
         <p class="mt-3 text-mist/80">Everything in free, plus:</p>
@@ -125,8 +144,9 @@ const plusSchema = {
     <p class="eyebrow reveal">Pricing</p>
     <h2 class="display-lg reveal mt-4" style="--reveal-delay:60ms">Simple pricing<FullStop /></h2>
     <p class="lead reveal mt-5 max-w-md text-ink/80" style="--reveal-delay:120ms">
-      Two ways to pay — whichever suits you. Billed through Google Play; cancel any time
-      from your store account.
+      Both plans start with a {PLUS_TRIAL_DAYS}-day free trial for new subscribers. Billed
+      through Google Play; cancel any time from your store account — during the trial,
+      you pay nothing.
     </p>
     <div class="mt-9 grid gap-5 sm:grid-cols-2">
       <div class="reveal rounded-[2rem] bg-mist/70 p-7 sm:p-9">
@@ -135,7 +155,9 @@ const plusSchema = {
           <span class="font-display text-4xl text-forest">{PLUS_PRICES.monthly}</span>
           <span class="text-soft"> / month</span>
         </p>
-        <p class="mt-3 text-sm text-soft">Flexible — stop whenever you like.</p>
+        <p class="mt-3 text-sm text-soft">
+          {PLUS_TRIAL_DAYS} days free, then {PLUS_PRICES.monthly}/month. Stop whenever you like.
+        </p>
       </div>
 
       <div class="reveal paper relative rounded-[2rem] bg-forest p-7 text-cream sm:p-9" style="--reveal-delay:120ms">
@@ -147,7 +169,9 @@ const plusSchema = {
           <span class="font-display text-4xl text-cream">{PLUS_PRICES.yearly}</span>
           <span class="text-mist/75"> / year</span>
         </p>
-        <p class="mt-3 text-sm text-mist/75">Best value for sticking with it.</p>
+        <p class="mt-3 text-sm text-mist/75">
+          {PLUS_TRIAL_DAYS} days free, then {PLUS_PRICES.yearly}/year. Best value for sticking with it.
+        </p>
       </div>
     </div>
 
@@ -161,10 +185,13 @@ const plusSchema = {
     <p class="reveal max-w-2xl border-t border-forest/15 pt-6 text-sm leading-relaxed text-soft">
       <span class="font-semibold text-forest">A few honest notes.</span> Plus is entirely
       optional — BeFree's core is free forever, and the crisis helpline is never gated.
-      App &amp; content blocking is available on Android first (iOS is on the way), uses a
-      private on-device filter, and asks only for the permissions each feature needs — all
-      revocable any time. Payments are handled by Google Play; we never see your card
-      details.
+      App &amp; content blocking and the short-form blocker are available on Android first
+      (iOS is on the way). The short-form blocker is a separate, opt-in accessibility
+      service that works entirely on your device: it recognises the Shorts or Reels feed
+      by its on-screen layout, never reads what you're watching, and sends nothing
+      anywhere. Every permission is asked for only when a feature needs it, and can be
+      revoked any time. The {PLUS_TRIAL_DAYS}-day trial is for new subscribers; payments
+      are handled by Google Play, and we never see your card details.
     </p>
   </section>
 
